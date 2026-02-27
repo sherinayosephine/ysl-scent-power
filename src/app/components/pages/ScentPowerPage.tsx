@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import scentVideoUrl from '../../../YSL SCENT POWER.mp4?url';
+import { motion, AnimatePresence } from "framer-motion";
 
 const scentNotes = [
   {
