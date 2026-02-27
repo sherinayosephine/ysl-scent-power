@@ -95,7 +95,7 @@ export function ScentPowerPage() {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="public/YSL SCENT POWER.mp4" type="video/mp4" />
+          <source src="/YSL SCENT POWER.mp4" type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/50" />
 
