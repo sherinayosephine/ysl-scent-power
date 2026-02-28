@@ -140,7 +140,7 @@ export function ScentPowerPage() {
                 {/* Side A: YSL Scent Power */}
                 <div className="space-y-6">
                   <img
-                    src="https://images.unsplash.com/photo-1617416430402-8c131ef45227?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwZXJmdW1lJTIwdmVuZGluZyUyMG1hY2hpbmUlMjBnb2xkJTIwYmxhY2t8ZW58MXx8fHwxNzcyMTMyNTg1fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    src="/asset/removebg-power scent.png"
                     alt="YSL Scent Power Machine"
                     className="w-full h-96 object-cover"
                   />
@@ -170,9 +170,9 @@ export function ScentPowerPage() {
                 {/* Side B: YSL Refill Power */}
                 <div className="space-y-6">
                   <img
-                    src="https://images.unsplash.com/photo-1751564360704-ff06002cb3c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwcGVyZnVtZSUyMHJlZmlsbCUyMHN0YXRpb24lMjBtb2Rlcm58ZW58MXx8fHwxNzcyMTMyNTg2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                    src="/asset/removebg-refill power.png"
                     alt="YSL Refill Power Station"
-                    className="w-full h-96 object-cover"
+                    className="w-full h-[410px] object-cover"
                   />
                   <h3
                     className="text-3xl md:text-4xl text-[#C2813F]"
@@ -311,12 +311,12 @@ export function ScentPowerPage() {
                     animate={{ scale: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     src={[
-                      "https://images.unsplash.com/photo-1588405748880-12d1d2a59db9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-                      "https://images.unsplash.com/photo-1617416430402-8c131ef45227?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-                      "https://images.unsplash.com/photo-1541643600914-78b084683601?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-                      "https://images.unsplash.com/photo-1563170351-be82bc888aa4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-                      "https://images.unsplash.com/photo-1522338242992-e1a54906a8da?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-                      "https://images.unsplash.com/photo-1751564360704-ff06002cb3c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080"
+                      "/asset/discovery.png",
+                      "/asset/layer.png",
+                      "/asset/wardrobe.png",
+                      "/asset/on the go.png",
+                      "/asset/myscent.png",
+                      "/asset/refill.png"
                     ][journeyStep]}
                     alt="Journey Step"
                     className="w-full h-full object-cover"
@@ -350,10 +350,10 @@ export function ScentPowerPage() {
                     >
                       {[
                         "SCENT DISCOVERY",
-                        "PERSONALIZE",
-                        "EDT BOTTLE",
-                        "DUAL SPRAY",
-                        "MY SCENT",
+                        "INTERACTIVE LAYERING",
+                        "CURATED WARDROBE",
+                        "ON-THE-GO",
+                        "MYSCENT",
                         "REFILL STATION"
                       ][journeyStep]}
                     </h3>
@@ -361,12 +361,12 @@ export function ScentPowerPage() {
                     {/* Description */}
                     <p className="text-sm md:text-lg text-white/90 leading-relaxed max-w-xl">
                       {[
-                        "Discover best match from YSL's main fragrance and layering notes.",
-                        "Choose YSL Les Pouvoirs de Sillage to dispense from auto vending machine.",
-                        "Applied as the primary fragrance for full scent and presence.",
-                        "Used for quick spray reinforcement throughout the day with different occasion.",
-                        "Layering booster connection and shared fragrance expression.",
-                        "Refill offers buyers waste and supports long term brand engagement."
+                        "Discovers best match from YSL’s main fragrances and layering notes ",
+                        "Layer your core scent with our notes to craft your own signature scent",
+                        "Purchase your customized  fragrance: a full-size bottle, a full discovery set, or the Travel Dual Spray",
+                        "Apply your core base and adjust on-the-go. Keep your signature identity, but smell uniquely different every day",
+                        "Log your fragrance combinations and access the MYSCENT app for personalized styling and community sharing.",
+                        "Return to the in-store YSL Refill Power to replenish empty cartridges"
                       ][journeyStep]}
                     </p>
                   </motion.div>

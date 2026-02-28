@@ -133,7 +133,7 @@ export function ProductsPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center bg-black text-white p-12">
             <div>
               <img
-                src="https://images.unsplash.com/photo-1727953990386-1423e47e53b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZXJmdW1lJTIwZGlzY292ZXJ5JTIwa2l0JTIwdmlhbHN8ZW58MXx8fHwxNzcyMTMyNTkwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/asset/discovery kit.png"
                 alt="Discovery Kit"
                 className="w-full h-96 object-cover"
               />
@@ -162,9 +162,9 @@ export function ProductsPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <img
-                src="https://images.unsplash.com/photo-1629563791765-18945c0f07af?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBwZXJmdW1lJTIwc3ByYXklMjBib3R0bGV8ZW58MXx8fHwxNzcyMTMyNTkwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/asset/dual.png"
                 alt="Travel Dual Spray"
-                className="w-full h-96 object-cover"
+                className="w-full h-96 object-contain"
               />
             </div>
             <div className="space-y-6">

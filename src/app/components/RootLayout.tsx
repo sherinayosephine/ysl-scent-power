@@ -9,8 +9,8 @@ export function RootLayout() {
 
   const tabs = [
     { name: "YSL Scent Power", path: "/" },
-    { name: "Our Product", path: "/products" },
-    { name: "Scent App", path: "/app" },
+    { name: "Our Products", path: "/products" },
+    { name: "My Scent", path: "/app" },
   ];
 
   return (
@@ -26,7 +26,7 @@ export function RootLayout() {
                 to={tab.path}
                 className={`px-4 py-2 md:px-8 md:py-3 rounded-full transition-all duration-300 text-sm md:text-base whitespace-nowrap ${ 
                   isActive
-                    ? "bg-[#C2813F] text-black"
+                    ? "bg-[#C2813F] text-white font-bold"
                     : "text-black hover:bg-black/5"
                 }`}
                 style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
