@@ -69,7 +69,7 @@ const communityPosts = [
 export function ScentAppPage() {
   const [showMixModal, setShowMixModal] = useState(false);
   const [activeTab, setActiveTab] = useState<"collection" | "custom">("collection");
-  const [mainTab, setMainTab] = useState<"profile" | "community">("profile");
+  const [mainTab, setMainTab] = useState<"profile" | "trending" | "community">("profile");
   const [selectedAccords, setSelectedAccords] = useState<string[]>([]);
   const [rating, setRating] = useState(0);
 
@@ -148,7 +148,7 @@ export function ScentAppPage() {
       <section className="px-4 md:px-12">
         <div className="max-w-7xl mx-auto">
           {/* Main Tab Toggle */}
-          <div className="flex gap-4 mb-8 justify-center">
+          <div className="flex gap-4 mb-8 justify-center flex-wrap">
             <button
               onClick={() => setMainTab("profile")}
               className={`px-8 py-3 transition-colors ${
@@ -158,6 +158,16 @@ export function ScentAppPage() {
               }`}
             >
               PROFILE
+            </button>
+            <button
+              onClick={() => setMainTab("trending")}
+              className={`px-8 py-3 transition-colors ${
+                mainTab === "trending"
+                  ? "bg-white text-black"
+                  : "bg-white/10 text-white hover:bg-white/20"
+              }`}
+            >
+              TRENDING
             </button>
             <button
               onClick={() => setMainTab("community")}
@@ -211,16 +221,48 @@ export function ScentAppPage() {
 
               {/* Content */}
               {activeTab === "collection" && (
-                <div className="grid md:grid-cols-2 gap-4 mb-8">
-                  {["YSL Libre", "YSL Black Opium", "YSL Mon Paris"].map((perfume) => (
-                    <div
-                      key={perfume}
-                      className="flex items-center justify-between p-4 border border-black/10"
-                    >
-                      <p>{perfume}</p>
-                      <span className="text-xs bg-black/5 px-3 py-1">Owned</span>
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  <div className="group cursor-pointer">
+                    <div className="relative overflow-hidden bg-neutral-100 mb-4 aspect-square">
+                      <img
+                        src="/asset/mon paris.webp"
+                        alt="Mon Paris"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
                     </div>
-                  ))}
+                    <div>
+                      <p className="font-semibold text-lg">YSL Mon Paris</p>
+                      <p className="text-xs text-black/60">Owned</p>
+                    </div>
+                  </div>
+
+                  <div className="group cursor-pointer">
+                    <div className="relative overflow-hidden bg-neutral-100 mb-4 aspect-square">
+                      <img
+                        src="/asset/libre1.jpg"
+                        alt="Libre"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">YSL Libre</p>
+                      <p className="text-xs text-black/60">Owned</p>
+                    </div>
+                  </div>
+
+                  <div className="group cursor-pointer">
+                    <div className="relative overflow-hidden bg-neutral-100 mb-4 aspect-square">
+                      <img
+                        src="/asset/opium.webp"
+                        alt="Opium"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg">YSL Black Opium</p>
+                      <p className="text-xs text-black/60">Owned</p>
+                    </div>
+                  </div>
                 </div>
               )}
 
@@ -247,7 +289,7 @@ export function ScentAppPage() {
                   </div>
                   <div className="p-4 border border-black/10">
                     <p className="mb-2">Midnight Mystery</p>
-                    <p className="text-xs text-black/60">LUMEN + YSL Black Opium + VECTOR</p>
+                    <p className="text-xs text-black/60">FLORENT + YSL Black Opium + VECTOR</p>
                     <div className="flex gap-1 mt-2">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <Star key={star} className="w-4 h-4 fill-black" />
@@ -265,7 +307,7 @@ export function ScentAppPage() {
                   </div>
                   <div className="p-4 border border-black/10">
                     <p className="mb-2">Summer Breeze</p>
-                    <p className="text-xs text-black/60">VERDE + AETHER + MINÉRALEWAVE</p>
+                    <p className="text-xs text-black/60">NEROLI + AETHER + MINÉRALEWAVE</p>
                     <div className="flex gap-1 mt-2">
                       {[1, 2, 3, 4].map((star) => (
                         <Star key={star} className="w-4 h-4 fill-black" />
@@ -275,7 +317,7 @@ export function ScentAppPage() {
                   </div>
                   <div className="p-4 border border-black/10">
                     <p className="mb-2">Date Night Charm</p>
-                    <p className="text-xs text-black/60">YSL Mon Paris + LUMEN</p>
+                    <p className="text-xs text-black/60">YSL Mon Paris + FLORENT</p>
                     <div className="flex gap-1 mt-2">
                       {[1, 2, 3, 4, 5].map((star) => (
                         <Star key={star} className="w-4 h-4 fill-black" />
@@ -293,7 +335,7 @@ export function ScentAppPage() {
                   </div>
                   <div className="p-4 border border-black/10">
                     <p className="mb-2">Weekend Wanderer</p>
-                    <p className="text-xs text-black/60">VERDE + LUMEN</p>
+                    <p className="text-xs text-black/60">NEROLI + LUMEN</p>
                     <div className="flex gap-1 mt-2">
                       {[1, 2, 3, 4].map((star) => (
                         <Star key={star} className="w-4 h-4 fill-black" />
@@ -315,12 +357,12 @@ export function ScentAppPage() {
             </div>
           )}
 
-          {/* Community Tab Content */}
-          {mainTab === "community" && (
+          {/* Trending Tab Content */}
+          {mainTab === "trending" && (
             <div className="bg-white text-black p-8 md:p-12 max-w-6xl mx-auto">
               <h3
                 className="text-3xl mb-6"
-                style={{ fontFamily: "'Bodoni Moda', serif" }}
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 Today's Scent Highlights
               </h3>
@@ -328,7 +370,7 @@ export function ScentAppPage() {
               {/* Daily Theme */}
               <div className="mb-8 p-6 bg-[#C2813F]/10 border-l-4 border-[#C2813F]">
                 <p className="text-xs uppercase tracking-widest text-[#C2813F] mb-2">Friday, February 27, 2026</p>
-                <h4 className="text-xl mb-2" style={{ fontFamily: "'Bodoni Moda', serif" }}>
+                <h4 className="text-xl mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
                   Evening Sophistication
                 </h4>
                 <p className="text-black/70 text-sm">
@@ -354,7 +396,7 @@ export function ScentAppPage() {
                     <div className="w-2 h-2 bg-[#C2813F] rounded-full"></div>
                     <p className="text-sm uppercase tracking-wider text-black/60">Weekend Favorite</p>
                   </div>
-                  <h5 className="text-lg mb-2">VERDE + LUMEN</h5>
+                  <h5 className="text-lg mb-2">NEROLI + FLORENT</h5>
                   <p className="text-sm text-black/70">
                     Fresh green floral layered with radiant brightness. Ideal for brunch dates and outdoor gatherings.
                   </p>
@@ -371,21 +413,60 @@ export function ScentAppPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* Community Tab Content */}
+          {mainTab === "community" && (
+            <div className="bg-white text-black p-8 md:p-12 max-w-6xl mx-auto">
+              <h3
+                className="text-3xl mb-8"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                Join Our Scent Communities
+              </h3>
+
+              {/* Community Clubs */}
+              <div className="grid md:grid-cols-3 gap-6 mb-12">
+                <div className="border-2 border-[#C2813F] p-6 hover:bg-[#C2813F]/5 transition-colors cursor-pointer">
+                  <h4 className="text-lg font-semibold mb-2">Padel & Perfume</h4>
+                  <p className="text-sm text-black/70 mb-4">For active souls who love fragrance on the court. Share your game-day scents and connect with fellow enthusiasts.</p>
+                  <button className="text-sm bg-[#C2813F] text-white px-4 py-2 hover:bg-[#C2813F]/80 transition-colors">
+                    Join Club
+                  </button>
+                </div>
+
+                <div className="border-2 border-[#C2813F] p-6 hover:bg-[#C2813F]/5 transition-colors cursor-pointer">
+                  <h4 className="text-lg font-semibold mb-2">Pilates Chic</h4>
+                  <p className="text-sm text-black/70 mb-4">The wellness-focused community. Discover scents that complement your health journey and mindful living.</p>
+                  <button className="text-sm bg-[#C2813F] text-white px-4 py-2 hover:bg-[#C2813F]/80 transition-colors">
+                    Join Club
+                  </button>
+                </div>
+
+                <div className="border-2 border-[#C2813F] p-6 hover:bg-[#C2813F]/5 transition-colors cursor-pointer">
+                  <h4 className="text-lg font-semibold mb-2">Evening Society</h4>
+                  <p className="text-sm text-black/70 mb-4">For the sophisticated evenings. Curated scents and recommendations for your most elegant nights out.</p>
+                  <button className="text-sm bg-[#C2813F] text-white px-4 py-2 hover:bg-[#C2813F]/80 transition-colors">
+                    Join Club
+                  </button>
+                </div>
+              </div>
 
               {/* Community Feed Section */}
-              <div className="mb-8">
-                <h4 className="text-2xl mb-6" style={{ fontFamily: "'Bodoni Moda', serif" }}>
-                  Community
+              <div className="mb-8 pb-8 border-t border-black/10 pt-8">
+                <h4 className="text-2xl mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
+                  Share Your Experience
                 </h4>
 
                 {/* Post Input */}
-                <div className="mb-6 p-4 border border-black/10 bg-black/[0.02]">
+                <div className="mb-6 p-6 border-2 border-black/10 bg-black/[0.02]">
                   <textarea
-                    placeholder="Share your scent experience..."
-                    className="w-full px-0 py-2 bg-transparent border-none focus:outline-none resize-none text-sm"
-                    rows={3}
+                    placeholder="Share your latest scent discovery, a memorable combination, or thoughts about your fragrance journey..."
+                    className="w-full px-0 py-3 bg-transparent border-none focus:outline-none resize-none text-sm"
+                    rows={4}
                   />
-                  <div className="flex justify-between items-center mt-3">
+                  <div className="flex justify-between items-center mt-4">
                     <div className="flex gap-2 flex-wrap">
                       <button className="px-3 py-1 bg-black/5 hover:bg-black/10 transition-colors text-xs">
                         Padel & Perfume

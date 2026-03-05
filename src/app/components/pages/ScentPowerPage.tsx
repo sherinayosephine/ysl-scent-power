@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const scentNotes = [
   {
-    name: "LUMEN",
+    name: "FLORENT",
     subtitle: "Radiant Floral",
     image: "https://images.unsplash.com/photo-1760445528267-25140a7bd31b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiZXJnYW1vdCUyMGNpdHJ1cyUyMGluZ3JlZGllbnRzJTIwZnJlc2h8ZW58MXx8fHwxNzcyMTMyNTg2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     top: "Bergamot FCF, Petitgrain, Sweet Orange",
@@ -49,7 +49,7 @@ const scentNotes = [
     keywords: "Pure, Calm, Refined, Modern",
   },
   {
-    name: "VERDE",
+    name: "NEROLI",
     subtitle: "Green Floral",
     image: "https://images.unsplash.com/photo-1590958886689-f53ccd8712d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxqYXNtaW5lJTIwZmxvd2VycyUyMGdyZWVuJTIwc3ByaW5nfGVufDF8fHx8MTc3MjEzMjU4OHww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
     top: "Bergamot, Magnolia Absolute, Coriander Seed",
@@ -131,7 +131,7 @@ export function ScentPowerPage() {
             <div className="py-20 px-4 md:px-12 max-w-7xl mx-auto">
               <h2
                 className="text-5xl md:text-7xl text-center mb-16"
-                style={{ fontFamily: "'Bodoni Moda', serif" }}
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 2 IN 1 VENDING MACHINE
               </h2>
@@ -146,22 +146,21 @@ export function ScentPowerPage() {
                   />
                   <h3
                     className="text-3xl md:text-4xl text-[#C2813F]"
-                    style={{ fontFamily: "'Bodoni Moda', serif" }}
+                    style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     YSL Scent Power
                   </h3>
                   <div className="space-y-4">
-                    <div className="border-l-2 border-[#C2813F] pl-4">
-                      <p className="text-sm uppercase tracking-wider mb-2">Layering Experience</p>
-                      <p className="text-white/80">
-                        Discover our 6 layering notes to combine with YSL series perfume
+                    <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
+                      <p className="text-sm uppercase tracking-widest font-semibold text-[#C2813F] mb-3">Layering Experience</p>
+                      <p className="text-white text-lg leading-relaxed">
+                        Master the art of fragrance blending. Combine 6 exclusive layering notes to create your signature scent with infinite possibilities.
                       </p>
                     </div>
-                    <div className="border-l-2 border-[#C2813F] pl-4">
-                      <p className="text-sm uppercase tracking-wider mb-2">Private Consultation</p>
-                      <p className="text-white/80">
-                        A personalized fragrance session to explore, layer, and refine your
-                        signature with expert guidance
+                    <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
+                      <p className="text-sm uppercase tracking-widest font-semibold text-[#C2813F] mb-3">Private Consultation</p>
+                      <p className="text-white text-lg leading-relaxed">
+                        Expert guidance tailored to you. Discover your perfect fragrance identity through personalized consultation and refinement.
                       </p>
                     </div>
                   </div>
@@ -176,21 +175,21 @@ export function ScentPowerPage() {
                   />
                   <h3
                     className="text-3xl md:text-4xl text-[#C2813F]"
-                    style={{ fontFamily: "'Bodoni Moda', serif" }}
+                    style={{ fontFamily: "'Playfair Display', serif" }}
                   >
                     YSL Refill Power
                   </h3>
                   <div className="space-y-4">
-                    <div className="border-l-2 border-[#C2813F] pl-4">
-                      <p className="text-2xl mb-2">$65.00</p>
-                      <p className="text-white/80">For refill perfume of YSL Les Pouvoirs de Sillage 60ml Bottle</p>
+                    <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
+                      <p className="text-[#C2813F] text-3xl font-semibold mb-3">$65.00</p>
+                      <p className="text-white text-lg">Premium refill for YSL Les Pouvoirs de Sillage 60ml Bottle</p>
                     </div>
-                    <div className="bg-[#C2813F]/20 p-4 border-l-4 border-[#C2813F]">
-                      <p className="uppercase tracking-wider">
+                    <div className="bg-[#C2813F]/25 p-6 border-l-4 border-[#C2813F] rounded-r-lg backdrop-blur-sm">
+                      <p className="uppercase tracking-widest font-semibold text-[#C2813F]">
                         #RecycleYSLGlass
                       </p>
-                      <p className="text-white/80 mt-2">
-                        Garbage activation for all YSL glass-product
+                      <p className="text-white mt-3 text-lg">
+                        Sustainable luxury. Return your glass bottles for exclusive rewards and environmental impact.
                       </p>
                     </div>
                   </div>
@@ -311,10 +310,10 @@ export function ScentPowerPage() {
                     animate={{ scale: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     src={[
-                      "/asset/discovery.png",
-                      "/asset/layer.png",
-                      "/asset/wardrobe.png",
-                      "/asset/on the go.png",
+                      "/asset/STEP 1.png",
+                      "/asset/STEP 2.png",
+                      "/asset/STEP 3.png",
+                      "/asset/STEP 4.png",
                       "/asset/myscent.png",
                       "/asset/refill.png"
                     ][journeyStep]}

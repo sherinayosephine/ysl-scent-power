@@ -1,53 +1,61 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, ShoppingCart } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "../ui/carousel";
 
 const products = [
   {
-    name: "LUMEN",
-    fullName: "LUMEN Eau De Toilette",
+    name: "FLORENT",
+    fullName: "FLORENT Eau De Toilette",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/FLORAL ACCORD.png",
+    image: "/asset/florent.png",
   },
   {
     name: "MINÉRALEWAVE",
     fullName: "MINÉRALEWAVE Eau De Toilette",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/AQUATIC ACCORD.png",
+    image: "/asset/minerale.png",
   },
   {
     name: "VECTOR",
     fullName: "VECTOR Eau De Toilette",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/SPICY ACCORD.png",
+    image: "/asset/vector.png",
   },
   {
     name: "AETHER",
     fullName: "AETHER Eau De Toilette",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/FOUGERE ACCORD.png",
+    image: "/asset/aether.png",
   },
   {
     name: "BLANC",
     fullName: "BLANC Eau De Toilette",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/WHITE TEA ACCORD.png",
+    image: "/asset/blanc.png",
   },
   {
-    name: "VERDE",
-    fullName: "VERDE Eau De Toilette",
+    name: "NEROLI",
+    fullName: "NEROLI Eau De Toilette",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/GREEN FRUIT ACCORD.png",
+    image: "/asset/neroli.png",
   },
 ];
 
 export function ProductsPage() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [carouselApi, setCarouselApi] = useState<any>(null);
 
   const scroll = (direction: "left" | "right") => {
     const container = document.getElementById("product-carousel");
@@ -63,6 +71,16 @@ export function ProductsPage() {
     }
   };
 
+  const handleCarouselScroll = (direction: "left" | "right") => {
+    if (carouselApi) {
+      if (direction === "left") {
+        carouselApi.scrollPrev();
+      } else {
+        carouselApi.scrollNext();
+      }
+    }
+  };
+
   return (
     <div className="bg-white text-black min-h-screen pt-24 md:pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-4 md:px-12">
@@ -70,7 +88,7 @@ export function ProductsPage() {
         <div className="mb-20 md:mb-32">
           <h2
             className="text-3xl md:text-5xl lg:text-6xl mb-8 md:mb-12"
-            style={{ fontFamily: "'Bodoni Moda', serif" }}
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >OUR PRODUCTS COLLECTION</h2>
 
           <div className="relative">
@@ -94,7 +112,7 @@ export function ProductsPage() {
                   <div className="space-y-3">
                     <h3
                       className="text-2xl"
-                      style={{ fontFamily: "'Bodoni Moda', serif" }}
+                      style={{ fontFamily: "'Playfair Display', serif" }}
                     >
                       {product.fullName}
                     </h3>
@@ -141,7 +159,7 @@ export function ProductsPage() {
             <div className="space-y-6">
               <h3
                 className="text-4xl md:text-5xl"
-                style={{ fontFamily: "'Bodoni Moda', serif" }}
+                style={{ fontFamily: "'Playfair Display', serif" }}
               >
                 YSL Les Pouvoirs de Sillage
               </h3>
@@ -156,35 +174,90 @@ export function ProductsPage() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Section 3: Travel Dual Spray */}
-        <div>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <img
-                src="/asset/dual.png"
-                alt="Travel Dual Spray"
-                className="w-full h-96 object-contain"
-              />
-            </div>
-            <div className="space-y-6">
-              <h3
-                className="text-4xl md:text-5xl"
-                style={{ fontFamily: "'Bodoni Moda', serif" }}
-              >
-                YSL Travel Dual Spray
-              </h3>
-              <p className="text-2xl">
-                $50.00 <span className="text-lg text-black/60">For YSL Travel Dual Spray from YSL Collection Series</span>
-              </p>
-              <p className="text-lg text-black/70">
-                A luxury dual spray designed to hold two fragrance expressions in one compact format.
-              </p>
-              <button className="flex items-center gap-2 border border-black px-8 py-4 hover:bg-black hover:text-white transition-colors">
-                <ShoppingCart className="w-5 h-5" />
-                Add to Cart
-              </button>
-            </div>
+      {/* Section 3: Travel Dual Spray - Full Width */}
+      <div>
+        {/* 3D Video - Full Screen Width */}
+        <div className="relative w-screen h-auto -ml-[calc(50vw-50%)]">
+          <video
+            src="/asset/3d video.mp4"
+            autoPlay
+            loop
+            muted
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
+        {/* Product Info & Carousel Section */}
+        <div className="max-w-7xl mx-auto px-4 md:px-12 space-y-12 py-20">
+          {/* Image Carousel */}
+          <div className="relative">
+            <Carousel className="w-full" setApi={setCarouselApi}>
+              <CarouselContent>
+                <CarouselItem>
+                  <div className="bg-neutral-50 overflow-hidden">
+                    <img
+                      src="/asset/dual spray.png"
+                      alt="Dual"
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="bg-neutral-50 overflow-hidden">
+                    <img
+                      src="/asset/dual dual.PNG"
+                      alt="Dual Spray"
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+                <CarouselItem>
+                  <div className="bg-neutral-50 overflow-hidden">
+                    <img
+                      src="/asset/dual color.png"
+                      alt="Dual Color"
+                      className="w-full h-auto object-cover"
+                    />
+                  </div>
+                </CarouselItem>
+              </CarouselContent>
+            </Carousel>
+
+            {/* Carousel Navigation - Left and Right Overlay */}
+            <button
+              onClick={() => handleCarouselScroll("left")}
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-black bg-white flex items-center justify-center hover:bg-black hover:text-white transition-colors z-10"
+            >
+              <ChevronLeft />
+            </button>
+            <button
+              onClick={() => handleCarouselScroll("right")}
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 border border-black bg-white flex items-center justify-center hover:bg-black hover:text-white transition-colors z-10"
+            >
+              <ChevronRight />
+            </button>
+          </div>
+
+          {/* Product Info Section */}
+          <div className="space-y-6">
+            <h3
+              className="text-4xl md:text-5xl"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              YSL Travel Dual Spray
+            </h3>
+            <p className="text-2xl">
+              $50.00 <span className="text-lg text-black/60">For YSL Travel Dual Spray from YSL Collection Series</span>
+            </p>
+            <p className="text-lg text-black/70">
+              A luxury dual spray designed to hold two fragrance expressions in one compact format.
+            </p>
+            <button className="flex items-center gap-2 border border-black px-8 py-4 hover:bg-black hover:text-white transition-colors">
+              <ShoppingCart className="w-5 h-5" />
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>
