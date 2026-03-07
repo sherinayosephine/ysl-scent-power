@@ -136,6 +136,20 @@ export function ScentPowerPage() {
                 2 IN 1 VENDING MACHINE
               </h2>
 
+              {/* Vending Machine Video ADDED HERE */}
+              <div className="w-full mb-16 shadow-2xl">
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto max-h-[70vh] object-cover rounded-lg border border-white/10"
+                >
+                  <source src="/asset/vending.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+
               <div className="grid md:grid-cols-2 gap-12">
                 {/* Side A: YSL Scent Power */}
                 <div className="space-y-6">
