@@ -399,7 +399,7 @@ export function ScentPowerPage() {
                     animate={{ scale: 1 }}
                     transition={{ duration: 1.2, ease: "easeOut" }}
                     src={[
-                      "/asset/STEP 1.png",
+                      "/asset/journey.PNG",
                       "/asset/STEP 2.png",
                       "/asset/STEP 3.png",
                       "/asset/STEP 4.png",
@@ -438,14 +438,14 @@ export function ScentPowerPage() {
                         "CURATED WARDROBE",
                         "ON-THE-GO",
                         "MYSCENT",
-                        "RE পণ্ডিত FILL STATION"
+                        "REFILL STATION"
                       ][journeyStep]}
                     </h3>
 
                     <p className="text-sm md:text-lg text-white/90 leading-relaxed max-w-xl">
                       {[
                         "Discovers best match from YSL’s main fragrances and layering notes and their sound profiles through the Power ON headset",
-                        "Layer your core scent with our notes to craft your own signature scent",
+                        "Layer your core scent with our notes to craft your own signature scent and hear each of its unique sound identity",
                         "Purchase your customized  fragrance: a full-size bottle, a full discovery set, or the Travel Dual Spray",
                         "Apply your core base and adjust on-the-go. Keep your signature identity, but smell uniquely different every day",
                         "Log your fragrance combinations and access the MYSCENT app for personalized styling and community sharing.",

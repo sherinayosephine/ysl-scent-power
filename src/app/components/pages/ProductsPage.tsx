@@ -185,6 +185,7 @@ export function ProductsPage() {
             autoPlay
             loop
             muted
+            playsInline /* THIS IS THE FIX FOR MOBILE */
             className="w-full h-auto object-cover"
           />
         </div>
