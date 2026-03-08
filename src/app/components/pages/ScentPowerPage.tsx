@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const scentNotes = [
   {
@@ -59,26 +59,7 @@ const scentNotes = [
   },
 ];
 
-const journeySteps = [
-  {
-    title: "The Consultation",
-    description: "Discover your unique scent profile with our digital advisor",
-    image: "https://images.unsplash.com/photo-1723391962110-299d412ca046?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBwZXJmdW1lJTIwY29uc3VsdGF0aW9uJTIwYWR2aXNvcnxlbnwxfHx8fDE3NzIxMzI1ODh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  },
-  {
-    title: "The Activation",
-    description: "Experience our immersive vending machine dispensing your custom blend",
-    image: "https://images.unsplash.com/photo-1727953990386-1423e47e53b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBwZXJmdW1lJTIwZGlzcGVuc2VyJTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NzIxMzI1ODl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  },
-  {
-    title: "The Collection",
-    description: "Receive your personalized fragrance in an exclusive bottle",
-    image: "https://images.unsplash.com/photo-1693960794591-fc7c72a15e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwcGVyZnVtZSUyMGJvdHRsZSUyMGhhbmR8ZW58MXx8fHwxNzcyMTMyNTg5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-  },
-];
-
 export function ScentPowerPage() {
-  const [showMachine, setShowMachine] = useState(false);
   const [activeNote, setActiveNote] = useState(0);
   const [journeyStep, setJourneyStep] = useState(0);
 
@@ -108,111 +89,207 @@ export function ScentPowerPage() {
             <br />
             <span className="text-xl md:text-3xl lg:text-4xl block mt-4 md:mt-8 font-light tracking-wider">THE ART OF LAYERING</span>
           </h1>
-          <button
-            onClick={() => setShowMachine(!showMachine)}
-            className="bg-[#C2813F] text-black px-8 md:px-12 py-3 md:py-4 hover:bg-[#d49550] transition-colors flex items-center gap-3 mx-auto group text-sm md:text-base"
+          {/* Button changed to an anchor link that smooth-scrolls to the innovation section */}
+          <a
+            href="#innovation-section"
+            className="bg-[#C2813F] text-black px-8 md:px-12 py-3 md:py-4 hover:bg-[#d49550] transition-colors inline-flex items-center gap-3 mx-auto group text-sm md:text-base cursor-pointer"
           >
             DISCOVER THE INNOVATION
-            <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMachine ? 'rotate-180' : 'group-hover:translate-y-1'}`} />
-          </button>
+            <ChevronDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
+          </a>
         </div>
       </section>
 
-      {/* 2-in-1 Machine Section */}
-      <AnimatePresence>
-        {showMachine && (
-          <motion.section
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="overflow-hidden"
+      {/* Innovation Section (Always Visible) */}
+      <section id="innovation-section" className="py-20 px-4 md:px-12 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          {/* Part 1: Vending Machine */}
+          <h2
+            className="text-5xl md:text-7xl text-center mb-16"
+            style={{ fontFamily: "'Playfair Display', serif" }}
           >
-            <div className="py-20 px-4 md:px-12 max-w-7xl mx-auto">
-              <h2
-                className="text-5xl md:text-7xl text-center mb-16"
+            2 IN 1 VENDING MACHINE
+          </h2>
+
+          {/* Vending Machine Video */}
+          <div className="w-full mb-16 shadow-2xl">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="w-full h-auto max-h-[70vh] object-cover rounded-lg border border-white/10"
+            >
+              <source src="/asset/vending.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12 mb-32">
+            {/* Side A: YSL Scent Power */}
+            <div className="space-y-6">
+              <img
+                src="/asset/removebg-power scent.png"
+                alt="YSL Scent Power Machine"
+                className="w-full h-96 object-cover"
+              />
+              <h3
+                className="text-3xl md:text-4xl text-[#C2813F]"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                2 IN 1 VENDING MACHINE
-              </h2>
-
-              {/* Vending Machine Video ADDED HERE */}
-              <div className="w-full mb-16 shadow-2xl">
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="w-full h-auto max-h-[70vh] object-cover rounded-lg border border-white/10"
-                >
-                  <source src="/asset/vending.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
+                YSL Scent Power
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
+                  <p className="text-sm uppercase tracking-widest font-semibold text-[#C2813F] mb-3">Layering Experience</p>
+                  <p className="text-white text-lg leading-relaxed">
+                    Master the art of fragrance blending. Combine 6 exclusive layering notes to create your signature scent with infinite possibilities.
+                  </p>
+                </div>
+                <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
+                  <p className="text-sm uppercase tracking-widest font-semibold text-[#C2813F] mb-3">Private Consultation</p>
+                  <p className="text-white text-lg leading-relaxed">
+                    Expert guidance tailored to you. Discover your perfect fragrance identity through personalized consultation and refinement.
+                  </p>
+                </div>
               </div>
+            </div>
 
-              <div className="grid md:grid-cols-2 gap-12">
-                {/* Side A: YSL Scent Power */}
-                <div className="space-y-6">
-                  <img
-                    src="/asset/removebg-power scent.png"
-                    alt="YSL Scent Power Machine"
-                    className="w-full h-96 object-cover"
-                  />
-                  <h3
-                    className="text-3xl md:text-4xl text-[#C2813F]"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    YSL Scent Power
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
-                      <p className="text-sm uppercase tracking-widest font-semibold text-[#C2813F] mb-3">Layering Experience</p>
-                      <p className="text-white text-lg leading-relaxed">
-                        Master the art of fragrance blending. Combine 6 exclusive layering notes to create your signature scent with infinite possibilities.
-                      </p>
-                    </div>
-                    <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
-                      <p className="text-sm uppercase tracking-widest font-semibold text-[#C2813F] mb-3">Private Consultation</p>
-                      <p className="text-white text-lg leading-relaxed">
-                        Expert guidance tailored to you. Discover your perfect fragrance identity through personalized consultation and refinement.
-                      </p>
-                    </div>
+            {/* Side B: YSL Refill Power */}
+            <div className="space-y-6">
+              <img
+                src="/asset/removebg-refill power.png"
+                alt="YSL Refill Power Station"
+                className="w-full h-[410px] object-cover"
+              />
+              <h3
+                className="text-3xl md:text-4xl text-[#C2813F]"
+                style={{ fontFamily: "'Playfair Display', serif" }}
+              >
+                YSL Refill Power
+              </h3>
+              <div className="space-y-4">
+                <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
+                  <p className="text-[#C2813F] text-3xl font-semibold mb-3">$65.00</p>
+                  <p className="text-white text-lg">Premium refill for YSL Les Pouvoirs de Sillage 60ml Bottle</p>
+                </div>
+                <div className="bg-[#C2813F]/25 p-6 border-l-4 border-[#C2813F] rounded-r-lg backdrop-blur-sm">
+                  <p className="uppercase tracking-widest font-semibold text-[#C2813F]">
+                    #RecycleYSLGlass
+                  </p>
+                  <p className="text-white mt-3 text-lg">
+                    Sustainable luxury. Return your glass bottles for exclusive rewards and environmental impact.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Part 2: Power ON Headset Feature (New Section) */}
+          <div className="border-t border-white/10 pt-20">
+            <h2
+              className="text-5xl md:text-7xl text-center mb-16"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              MULTISENSORY EXPERIENCE
+            </h2>
+
+            {/* Main Power ON Feature (satu.jpg) */}
+            <div className="mb-16">
+              <img 
+                src="/asset/satu.png" 
+                alt="Power ON Olfactive Navigation Headset" 
+                className="w-full h-auto object-cover rounded-lg mb-8 shadow-2xl border border-white/5" 
+              />
+              <div className="text-center max-w-4xl mx-auto">
+                <h3 className="text-4xl md:text-5xl text-[#C2813F] mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>Power ON</h3>
+                <p className="text-white/90 text-xl leading-relaxed">
+                  Power ON (Olfactive Navigation) is a wearable headset connected to the YSL Scent Power 
+                  system that guides fragrance layering discovery with AI voice assistance and synchronized 
+                  sound, creating a multisensory experience through scent and audio.
+                </p>
+              </div>
+            </div>
+
+            {/* Grid for Voice Assistant & Charging Specs */}
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Hands-Free AI Voice Assistant (dua.jpg) */}
+              <div className="bg-gradient-to-b from-[#C2813F]/10 to-transparent p-8 rounded-lg border border-[#C2813F]/20 flex flex-col h-full">
+                <img 
+                  src="/asset/dua.png" 
+                  alt="Hands-Free AI Voice Assistant" 
+                  className="w-full h-auto object-cover rounded border border-white/5 mb-8 flex-grow" 
+                />
+                <div>
+                  <h4 className="text-2xl md:text-3xl text-[#C2813F] mb-4" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    Hands-Free AI Voice Assistant
+                  </h4>
+                  <p className="text-white/80 text-lg mb-6">AI assistant guiding personalized scent discovery and layering</p>
+                  
+                  <div className="space-y-4 font-light text-lg">
+                    <p className="text-white flex items-center gap-3">
+                      <span className="text-[#C2813F]">🎙️</span> "Hear the sound of this fragrance"
+                    </p>
+                    <p className="text-white flex items-center gap-3">
+                      <span className="text-[#C2813F]">🎙️</span> "Explore layering combinations"
+                    </p>
+                    <p className="text-white/50 flex items-center gap-3">
+                      <span className="text-[#C2813F]/50">🎙️</span> "What does this scent express"
+                    </p>
+                    <p className="text-white/50 flex items-center gap-3">
+                      <span className="text-[#C2813F]/50">🎙️</span> "Save my scent profile"
+                    </p>
                   </div>
                 </div>
+              </div>
 
-                {/* Side B: YSL Refill Power */}
-                <div className="space-y-6">
-                  <img
-                    src="/asset/removebg-refill power.png"
-                    alt="YSL Refill Power Station"
-                    className="w-full h-[410px] object-cover"
-                  />
-                  <h3
-                    className="text-3xl md:text-4xl text-[#C2813F]"
-                    style={{ fontFamily: "'Playfair Display', serif" }}
-                  >
-                    YSL Refill Power
-                  </h3>
-                  <div className="space-y-4">
-                    <div className="bg-gradient-to-r from-[#C2813F]/15 to-transparent p-6 border-l-4 border-[#C2813F] rounded-r-lg">
-                      <p className="text-[#C2813F] text-3xl font-semibold mb-3">$65.00</p>
-                      <p className="text-white text-lg">Premium refill for YSL Les Pouvoirs de Sillage 60ml Bottle</p>
+              {/* Type-C Charging & Audio Specs (tiga.jpg) */}
+              <div className="bg-gradient-to-b from-[#C2813F]/10 to-transparent p-8 rounded-lg border border-[#C2813F]/20 flex flex-col h-full">
+                <img 
+                  src="/asset/tiga.png" 
+                  alt="Type-C Charging and Audio Components" 
+                  className="w-full h-auto object-cover rounded border border-white/5 mb-8 flex-grow" 
+                />
+                <div>
+                  <h4 className="text-2xl md:text-3xl text-[#C2813F] mb-8" style={{ fontFamily: "'Playfair Display', serif" }}>
+                    Type-C Charging
+                  </h4>
+                  
+                  <div className="grid grid-cols-2 gap-8 mb-8">
+                    <div>
+                      <p className="text-sm uppercase tracking-widest text-white/70 mb-2">Charging Time</p>
+                      <p className="text-4xl font-bold text-[#C2813F]">3H</p>
                     </div>
-                    <div className="bg-[#C2813F]/25 p-6 border-l-4 border-[#C2813F] rounded-r-lg backdrop-blur-sm">
-                      <p className="uppercase tracking-widest font-semibold text-[#C2813F]">
-                        #RecycleYSLGlass
-                      </p>
-                      <p className="text-white mt-3 text-lg">
-                        Sustainable luxury. Return your glass bottles for exclusive rewards and environmental impact.
-                      </p>
+                    <div>
+                      <p className="text-sm uppercase tracking-widest text-white/70 mb-2">Music Time</p>
+                      <p className="text-4xl font-bold text-[#C2813F]">6-8H</p>
+                    </div>
+                    <div className="col-span-2">
+                      <p className="text-sm uppercase tracking-widest text-white/70 mb-2">Standby Time</p>
+                      <p className="text-4xl font-bold text-[#C2813F]">&gt;80H</p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-8 pt-6 border-t border-white/10">
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-[#C2813F] text-black flex items-center justify-center text-xl">
+                        🎧
+                      </div>
+                      <span className="text-sm uppercase tracking-widest font-semibold leading-tight">Stereo<br/>Sound</span>
+                    </div>
+                    <div className="flex items-center gap-4">
+                      <div className="w-12 h-12 rounded-full bg-[#C2813F] text-black flex items-center justify-center text-xl">
+                        🎵
+                      </div>
+                      <span className="text-sm uppercase tracking-widest font-semibold leading-tight">Audio<br/>Resolution</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </motion.section>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      </section>
 
       {/* 6 Notes Sliding Tab */}
       <section className="py-20 px-4 md:px-12 bg-white text-black">
@@ -306,7 +383,6 @@ export function ScentPowerPage() {
 
           {/* Luxury Carousel */}
           <div className="relative px-0 md:px-16">
-            {/* Carousel Content */}
             <div className="overflow-hidden">
               <motion.div
                 key={journeyStep}
@@ -316,7 +392,6 @@ export function ScentPowerPage() {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="relative h-[500px] md:h-[600px] flex items-end"
               >
-                {/* Background Image with Parallax Effect */}
                 <div className="absolute inset-0">
                   <motion.img
                     key={`img-${journeyStep}`}
@@ -334,18 +409,15 @@ export function ScentPowerPage() {
                     alt="Journey Step"
                     className="w-full h-full object-cover"
                   />
-                  {/* Elegant gradient overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" />
                 </div>
 
-                {/* Content */}
                 <div className="relative z-10 p-6 md:p-12 lg:p-16 max-w-3xl">
                   <motion.div
                     initial={{ y: 30, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
                   >
-                    {/* Step Number - Gold Accent */}
                     <div className="flex items-center gap-3 md:gap-4 mb-4 md:mb-6">
                       <div 
                         className="text-5xl md:text-8xl text-[#C2813F] leading-none"
@@ -356,7 +428,6 @@ export function ScentPowerPage() {
                       <div className="h-px w-12 md:w-16 bg-[#C2813F]" />
                     </div>
 
-                    {/* Title */}
                     <h3 
                       className="text-2xl md:text-4xl lg:text-5xl mb-4 md:mb-6 tracking-tight"
                       style={{ fontFamily: "'Bodoni Moda', serif" }}
@@ -367,14 +438,13 @@ export function ScentPowerPage() {
                         "CURATED WARDROBE",
                         "ON-THE-GO",
                         "MYSCENT",
-                        "REFILL STATION"
+                        "RE পণ্ডিত FILL STATION"
                       ][journeyStep]}
                     </h3>
 
-                    {/* Description */}
                     <p className="text-sm md:text-lg text-white/90 leading-relaxed max-w-xl">
                       {[
-                        "Discovers best match from YSL’s main fragrances and layering notes ",
+                        "Discovers best match from YSL’s main fragrances and layering notes and their sound profiles through the Power ON headset",
                         "Layer your core scent with our notes to craft your own signature scent",
                         "Purchase your customized  fragrance: a full-size bottle, a full discovery set, or the Travel Dual Spray",
                         "Apply your core base and adjust on-the-go. Keep your signature identity, but smell uniquely different every day",
@@ -387,7 +457,6 @@ export function ScentPowerPage() {
               </motion.div>
             </div>
 
-            {/* Navigation Buttons - Luxury Style */}
             <button
               onClick={() =>
                 setJourneyStep((prev) => (prev > 0 ? prev - 1 : 5))
@@ -406,7 +475,6 @@ export function ScentPowerPage() {
             </button>
           </div>
 
-          {/* Elegant Progress Indicators */}
           <div className="flex justify-center items-center gap-2 md:gap-3 mt-8 md:mt-12">
             {[0, 1, 2, 3, 4, 5].map((index) => (
               <button
