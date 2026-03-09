@@ -197,7 +197,7 @@ export function ScentPowerPage() {
             {/* Main Power ON Feature (satu.jpg) */}
             <div className="mb-16">
               <img 
-                src="/asset/satu.png" 
+                src="/asset/scent power.png" 
                 alt="Power ON Olfactive Navigation Headset" 
                 className="w-full h-auto object-cover rounded-lg mb-8 shadow-2xl border border-white/5" 
               />
@@ -445,11 +445,11 @@ export function ScentPowerPage() {
                     <p className="text-sm md:text-lg text-white/90 leading-relaxed max-w-xl">
                       {[
                         "Discovers best match from YSL’s main fragrances and layering notes and their sound profiles through the Power ON headset",
-                        "Layer your core scent with our notes to craft your own signature scent and hear each of its unique sound identity",
+                        "Layer your core scent with our notes to craft your own signature scent and hear each of its unique sound identity, creating a multisensory experience",
                         "Purchase your customized  fragrance: a full-size bottle, a full discovery set, or the Travel Dual Spray",
                         "Apply your core base and adjust on-the-go. Keep your signature identity, but smell uniquely different every day",
-                        "Log your fragrance combinations and access the MYSCENT app for personalized styling and community sharing.",
-                        "Return to the in-store YSL Refill Power to replenish empty cartridges"
+                        "Log your fragrance combinations and access the MYSCENT app for personalized styling and community sharing, creating a digital scent wardrobe and social platform",
+                        "Return to the in-store YSL Refill Power to replenish empty bottles, discover new notes, and continue your scent journey sustainably."
                       ][journeyStep]}
                     </p>
                   </motion.div>
