@@ -197,7 +197,7 @@ export function ScentPowerPage() {
             {/* Main Power ON Feature (satu.jpg) */}
             <div className="mb-16">
               <img 
-                src="/asset/scent power.png" 
+                src="/asset/bener.png" 
                 alt="Power ON Olfactive Navigation Headset" 
                 className="w-full h-auto object-cover rounded-lg mb-8 shadow-2xl border border-white/5" 
               />
