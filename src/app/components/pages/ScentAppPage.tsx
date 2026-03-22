@@ -1,634 +1,454 @@
 import { useState } from "react";
-import { X, Star, Search, MessageCircle, Repeat2, Heart, Share2, Plus } from "lucide-react";
+import {
+  X, Star, Search, MessageCircle, Heart, Share2, Plus,
+  ChevronRight, Flame, Users, User, Check, Bell,
+} from "lucide-react";
+
+type Page = "home" | "profile" | "discover" | "community";
+type WardrobeTab = "ysl" | "layering" | "custom";
 
 const scentOptions = ["LUMEN", "MINÉRALEWAVE", "VECTOR", "AETHER", "BLANC", "VERDE"];
 
 const communityPosts = [
-  {
-    user: "User_A",
-    content: "Just layered YSL Libre with the new VECTOR note. The dry down is incredible. #YSLScentPower",
-    likes: 234,
-    replies: 12,
-  },
-  {
-    user: "User_B",
-    content: "BLANC + AETHER = my new signature for morning meetings. So fresh and professional! ✨",
-    likes: 189,
-    replies: 8,
-  },
-  {
-    user: "User_C",
-    content: "Attended the YSL vending machine experience today. Mind blown by the technology and personalization! 🖤",
-    likes: 412,
-    replies: 23,
-  },
-  {
-    user: "User_D",
-    content: "VERDE is giving me spring garden party vibes. Perfect for brunch dates! Who else is obsessed?",
-    likes: 156,
-    replies: 15,
-  },
-  {
-    user: "User_E",
-    content: "My signature combo: LUMEN + YSL Black Opium. It's mysterious yet fresh. Total game changer!",
-    likes: 298,
-    replies: 19,
-  },
-  {
-    user: "User_F",
-    content: "Just got my personalized scent profile from the YSL AI. SO accurate it's scary! The future is here 🔮",
-    likes: 521,
-    replies: 34,
-  },
-  {
-    user: "User_G",
-    content: "MINÉRALEWAVE during yoga class = chef's kiss. Clean, calming, sophisticated. 10/10 recommend",
-    likes: 203,
-    replies: 11,
-  },
-  {
-    user: "User_H",
-    content: "Anyone else creating custom blends for different moods? I have 5 now and I'm obsessed with this layering journey!",
-    likes: 387,
-    replies: 28,
-  },
-  {
-    user: "User_I",
-    content: "The Padel & Perfume community is SO chic! Met amazing people at the YSL pop-up yesterday 🎾✨",
-    likes: 267,
-    replies: 16,
-  },
-  {
-    user: "User_J",
-    content: "VECTOR + Mon Paris = power couple energy. Wearing this to every important meeting from now on!",
-    likes: 445,
-    replies: 21,
-  },
+  { user: "Sofia M.", avatar: "S", content: "Just layered YSL Libre with VECTOR. The dry down is incredible. #YSLScentPower", likes: 234, replies: 12, time: "2h" },
+  { user: "Aria K.", avatar: "A", content: "BLANC + AETHER = my new signature for morning meetings. So fresh! ✨", likes: 189, replies: 8, time: "4h" },
+  { user: "Luna P.", avatar: "L", content: "YSL vending machine experience today. Mind blown by the personalization! 🖤", likes: 412, replies: 23, time: "5h" },
+  { user: "Emma R.", avatar: "E", content: "VERDE is giving me spring garden party vibes. Perfect for brunch dates!", likes: 156, replies: 15, time: "6h" },
+  { user: "Zara N.", avatar: "Z", content: "My combo: LUMEN + YSL Black Opium. It's mysterious yet fresh. Total game changer!", likes: 298, replies: 19, time: "8h" },
 ];
 
+const yslFragrances = [
+  { name: "Mon Paris", sub: "Eau de Parfum", img: "/asset/mon paris.webp", owned: true },
+  { name: "Libre", sub: "Eau de Parfum", img: "/asset/libre1.jpg", owned: true },
+  { name: "Black Opium", sub: "Eau de Parfum", img: "/asset/opium.webp", owned: true },
+  { name: "YSL Dual Spray", sub: "Travel Collection", img: "/asset/dual spray.png", owned: false },
+];
+
+const layeringScents = [
+  { name: "VECTOR", sub: "Sharp Spice", img: "/asset/vector.png" },
+  { name: "BLANC", sub: "White Tea", img: "/asset/blanc.png" },
+  { name: "AETHER", sub: "Aromatic", img: "/asset/aether.png" },
+  { name: "MINÉRALEWAVE", sub: "Aquatic", img: "/asset/minerale.png" },
+  { name: "LUMEN", sub: "Citrus", img: "/asset/florent.png" },
+  { name: "VERDE", sub: "Green Floral", img: "/asset/neroli.png" },
+];
+
+const customMixes = [
+  { name: "Evening Elegance", combo: "VECTOR + BLANC + Libre", stars: 5, occasion: "Evening" },
+  { name: "Fresh Morning", combo: "AETHER + MINÉRALEWAVE", stars: 4, occasion: "Daily" },
+  { name: "Midnight Mystery", combo: "LUMEN + Black Opium + VECTOR", stars: 5, occasion: "Night" },
+  { name: "Power Meeting", combo: "BLANC + VECTOR", stars: 5, occasion: "Professional" },
+];
+
+const trendingCombos = [
+  { rank: "01", name: "VECTOR + BLANC", desc: "Sharp spice meets white tea. Unforgettable evening presence.", tag: "COMBO OF THE DAY" },
+  { rank: "02", name: "NEROLI + VERDE", desc: "Fresh green floral. Ideal for brunch and outdoor gatherings.", tag: "WEEKEND FAVORITE" },
+  { rank: "03", name: "AETHER + MINÉRALEWAVE", desc: "Elevated aromatic meets aquatic. The ultimate pro signature.", tag: "PROFESSIONAL POWER" },
+  { rank: "04", name: "LUMEN + BLANC", desc: "Citrus brightness layered with clean white tea notes.", tag: "RISING" },
+];
+
+const css = `
+  @import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;0,6..96,700;1,6..96,400&family=Inter:wght@400;500;600;700;800&display=swap');
+  
+  .scent-app-container {
+    --black: #000;
+    --white: #fff;
+    --g950: #0a0a0a;
+    --g900: #111;
+    --g800: #1a1a1a;
+    --g700: #2a2a2a;
+    --g500: #555;
+    --g400: #888;
+    --g200: #ccc;
+    --gold: #C2813F;
+    --serif: 'Bodoni Moda', Georgia, serif;
+    --sans: 'Inter', sans-serif;
+    
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding-top: 100px; 
+    display: flex;
+    justify-content: center;
+  }
+
+  .scent-app-container h1, 
+  .scent-app-container h2, 
+  .scent-app-container h3, 
+  .scent-app-container h4, 
+  .scent-app-container h5 { 
+    font-family: var(--serif); 
+    font-weight: 700; 
+  }
+
+  .app-main {
+    width: 100%;
+    max-width: 800px;
+    border-left: 1px solid var(--g800);
+    border-right: 1px solid var(--g800);
+    background: var(--black);
+    min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
+  }
+
+  .app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--g800);
+  }
+  .app-title-group .sub { font-size: 10px; font-weight: 800; letter-spacing: 3px; color: var(--g400); margin-bottom: 2px;}
+  .app-title-group .main-title { font-size: 24px; font-family: var(--serif); font-weight: 700; letter-spacing: 2px;}
+
+  .main-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--g800);
+    background: var(--black);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .m-tab {
+    flex: 1;
+    padding: 20px 0;
+    background: transparent;
+    border: none;
+    color: var(--g500);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .m-tab.active {
+    color: var(--gold);
+    border-bottom: 2px solid var(--gold);
+  }
+  .m-tab:hover:not(.active) { color: var(--white); }
+
+  .page-content { padding: 40px 32px; }
+  .section-label { font-size: 13px; font-weight: 800; letter-spacing: 3px; color: var(--g400); display: block; margin-bottom: 16px; text-transform: uppercase; }
+  
+  .profile-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 48px; }
+  .p-avatar { width: 88px; height: 88px; background: var(--white); color: var(--black); display: flex; align-items: center; justify-content: center; font-size: 40px; font-family: var(--serif); font-weight: 700; margin-bottom: 16px;}
+  .p-name { font-size: 32px; margin-bottom: 8px; }
+  .p-role { font-size: 11px; font-weight: 800; letter-spacing: 3px; color: var(--gold); margin-bottom: 32px;}
+  .p-stats { display: flex; gap: 48px; }
+  .p-stat { text-align: center; }
+  .p-stat-n { font-size: 28px; font-family: var(--serif); font-weight: 700; }
+  .p-stat-l { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--g400); margin-top: 4px; text-transform: uppercase;}
+
+  .sub-tabs { display: flex; gap: 1px; background: var(--g800); margin-bottom: 32px; }
+  .s-tab { flex: 1; padding: 16px; background: var(--g950); border: none; color: var(--g400); font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;}
+  .s-tab.active { background: var(--white); color: var(--black); }
+
+  .item-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
+  .item-card { background: var(--black); border: 1px solid var(--g800); padding: 16px; cursor: pointer; transition: border-color 0.2s; }
+  .item-card:hover { border-color: var(--g500); }
+  .item-img-box { background: var(--white); aspect-ratio: 1; margin-bottom: 16px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .item-img-box img { width: 100%; height: 100%; object-fit: cover; }
+  .item-name { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .item-sub { font-size: 12px; font-weight: 500; color: var(--g400); }
+
+  .list-grid { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+  .list-item { display: flex; align-items: center; gap: 20px; background: var(--black); border: 1px solid var(--g800); padding: 16px; }
+  .list-img-box { width: 64px; height: 64px; background: var(--white); overflow: hidden; flex-shrink: 0; }
+  .list-img-box img { width: 100%; height: 100%; object-fit: cover; }
+  
+  .mix-card { background: var(--black); border: 1px solid var(--g800); padding: 24px; margin-bottom: 16px; }
+  .mix-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+  .mix-name { font-size: 20px; }
+  .mix-tag { font-size: 10px; font-weight: 800; padding: 4px 10px; border: 1px solid var(--g700); color: var(--g400); letter-spacing: 1px; text-transform: uppercase; }
+  .mix-combo { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 16px; line-height: 1.5; }
+  
+  .btn-primary { width: 100%; padding: 20px; background: var(--white); color: var(--black); border: none; font-size: 13px; font-weight: 800; letter-spacing: 3px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; transition: opacity 0.2s; text-transform: uppercase;}
+  .btn-primary:hover { opacity: 0.9; }
+
+  /* Discover */
+  .discover-hero { margin-bottom: 48px; padding-left: 24px; border-left: 3px solid var(--gold); }
+  .discover-hero h2 { font-size: 40px; margin-bottom: 12px; }
+  .discover-hero p { font-size: 16px; color: var(--g200); }
+
+  .trending-item { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--g800); align-items: flex-start; }
+  .t-rank { font-size: 40px; color: var(--g700); font-family: var(--serif); font-weight: 700; line-height: 1; }
+  .t-tag { font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--gold); margin-bottom: 8px; }
+  .t-title { font-size: 20px; margin-bottom: 8px; }
+  .t-desc { font-size: 14px; color: var(--g400); line-height: 1.5; }
+
+  /* Community */
+  .feed-post { padding: 24px 0; border-bottom: 1px solid var(--g800); }
+  .post-header { display: flex; gap: 16px; align-items: center; margin-bottom: 16px; }
+  .post-avatar { width: 48px; height: 48px; background: var(--white); color: var(--black); display: flex; align-items: center; justify-content: center; font-size: 20px; font-family: var(--serif); font-weight: 700; }
+  .post-user { font-size: 15px; font-weight: 700; }
+  .post-time { font-size: 12px; color: var(--g500); margin-left: 8px; }
+  .post-content { font-size: 15px; line-height: 1.6; margin-bottom: 16px; }
+  .post-actions { display: flex; gap: 24px; }
+  .action-btn { display: flex; align-items: center; gap: 8px; background: none; border: none; color: var(--g500); font-size: 13px; font-weight: 700; cursor: pointer; transition: color 0.2s; }
+  .action-btn:hover { color: var(--white); }
+
+  /* Modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  .modal-content { background: var(--g950); border: 1px solid var(--g800); width: 100%; max-width: 600px; padding: 40px; max-height: 90vh; overflow-y: auto; }
+  .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 32px; }
+  .modal-title { font-size: 24px; letter-spacing: 2px; }
+  .form-group { margin-bottom: 24px; }
+  .form-group label { display: block; font-size: 10px; font-weight: 800; letter-spacing: 2px; color: var(--g400); margin-bottom: 12px; }
+  .form-input { width: 100%; background: none; border: none; border-bottom: 1px solid var(--g700); color: var(--white); font-size: 16px; padding: 12px 0; outline: none; }
+  .form-input:focus { border-color: var(--white); }
+  .accord-btn { padding: 10px 16px; font-size: 11px; font-weight: 700; letter-spacing: 1px; border: 1px solid var(--g700); background: transparent; color: var(--g400); margin: 0 8px 8px 0; cursor: pointer; }
+  .accord-btn.selected { background: var(--white); color: var(--black); border-color: var(--white); }
+
+  /* Mobile Nav Bar */
+  .mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--black); border-top: 1px solid var(--g800); z-index: 200; }
+  .nav-btn { flex: 1; padding: 16px 0; background: none; border: none; color: var(--g500); display: flex; flex-direction: column; align-items: center; gap: 6px; font-weight: 700; cursor: pointer; }
+  .nav-btn.active { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    .scent-app-container { padding-top: 80px; }
+    .mobile-nav { display: flex; }
+    .main-tabs { display: none; } 
+    .app-main { border: none; padding-bottom: 100px; }
+    .page-content { padding: 24px 20px; }
+    .p-stats { gap: 32px; }
+    
+    /* MODIFIED: Fix for Goal 1 - Kept 2 columns on mobile so images are not massive */
+    .item-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .item-card { padding: 12px; }
+    .item-name { font-size: 14px; }
+    .item-sub { font-size: 11px; }
+    .list-item { padding: 12px; gap: 12px; }
+    .list-img-box { width: 56px; height: 56px; }
+    .mix-card { padding: 16px; }
+    .mix-name { font-size: 18px; }
+  }
+`;
+
 export function ScentAppPage() {
+  const [page, setPage] = useState<Page>("profile");
+  const [wardrobeTab, setWardrobeTab] = useState<WardrobeTab>("ysl");
   const [showMixModal, setShowMixModal] = useState(false);
-  const [activeTab, setActiveTab] = useState<"collection" | "custom">("collection");
-  const [mainTab, setMainTab] = useState<"profile" | "trending" | "community">("profile");
   const [selectedAccords, setSelectedAccords] = useState<string[]>([]);
   const [rating, setRating] = useState(0);
 
-  const toggleAccord = (accord: string) => {
-    setSelectedAccords((prev) =>
-      prev.includes(accord) ? prev.filter((a) => a !== accord) : [...prev, accord]
-    );
-  };
+  const toggleAccord = (a: string) =>
+    setSelectedAccords((prev) => prev.includes(a) ? prev.filter((x) => x !== a) : [...prev, a]);
 
   return (
-    <div className="bg-black text-white min-h-screen pt-24 md:pt-32 pb-20">
-      {/* Dashboard & News - Top Section */}
-      <section className="mb-12 md:mb-16 px-4 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          <h1
-            className="text-3xl md:text-6xl lg:text-8xl mb-8 md:mb-12"
-            style={{ fontFamily: "'Bodoni Moda', serif" }}
-          >
-            WHAT'S HAPPENING IN YSL BEAUTY
-          </h1>
-
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-            <div className="md:col-span-2 relative h-64 md:h-96 overflow-hidden group">
-              <img
-                src="https://images.unsplash.com/photo-1771512681998-99342c9a4f12?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwbW9kZWwlMjBwb3J0cmFpdCUyMGVsZWdhbnR8ZW58MXx8fHwxNzcyMDg3NTYyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Featured Story"
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <p className="text-[#C2813F] mb-2 uppercase tracking-wider text-sm">Featured</p>
-                <h3
-                  className="text-3xl md:text-4xl mb-3"
-                  style={{ fontFamily: "'Bodoni Moda', serif" }}
-                >
-                  The New Era of Scent Layering
-                </h3>
-                <p className="text-white/80">
-                  Discover how YSL is revolutionizing the fragrance experience
-                </p>
-              </div>
+    <>
+      <style>{css}</style>
+      <div className="scent-app-container">
+        
+        <main className="app-main">
+          
+          <div className="app-header">
+            <div className="app-title-group">
+              <div className="sub">YVES SAINT LAURENT</div>
+              <div className="main-title">MySCENT</div>
             </div>
-
-            <div className="space-y-8">
-              <div className="relative h-44 overflow-hidden group cursor-pointer">
-                <img
-                  src="https://images.unsplash.com/photo-1759003527966-b77f51fd9b3f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBiZWF1dHklMjBtYWdhemluZSUyMGVkaXRvcmlhbHxlbnwxfHx8fDE3NzIxMzI1OTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Story 2"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-sm mb-1">Vogue Paris</p>
-                  <p className="text-xs text-white/70">YSL's Sustainable Future</p>
-                </div>
-              </div>
-
-              <div className="relative h-44 overflow-hidden group cursor-pointer">
-                <img
-                  src="https://images.unsplash.com/photo-1693960794591-fc7c72a15e9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxlbGVnYW50JTIwcGVyZnVtZSUyMGJvdHRsZSUyMGhhbmR8ZW58MXx8fHwxNzcyMTMyNTg5fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                  alt="Story 3"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="text-sm mb-1">Elle Magazine</p>
-                  <p className="text-xs text-white/70">Les Pouvoirs Collection</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Split Screen Layout */}
-      <section className="px-4 md:px-12">
-        <div className="max-w-7xl mx-auto">
-          {/* Main Tab Toggle */}
-          <div className="flex gap-4 mb-8 justify-center flex-wrap">
-            <button
-              onClick={() => setMainTab("profile")}
-              className={`px-8 py-3 transition-colors ${
-                mainTab === "profile"
-                  ? "bg-white text-black"
-                  : "bg-white/10 text-white hover:bg-white/20"
-              }`}
-            >
-              PROFILE
-            </button>
-            <button
-              onClick={() => setMainTab("trending")}
-              className={`px-8 py-3 transition-colors ${
-                mainTab === "trending"
-                  ? "bg-white text-black"
-                  : "bg-white/10 text-white hover:bg-white/20"
-              }`}
-            >
-              TRENDING
-            </button>
-            <button
-              onClick={() => setMainTab("community")}
-              className={`px-8 py-3 transition-colors ${
-                mainTab === "community"
-                  ? "bg-white text-black"
-                  : "bg-white/10 text-white hover:bg-white/20"
-              }`}
-            >
-              COMMUNITY
+            <button style={{ background: 'none', border: 'none', color: 'var(--white)', cursor: 'pointer' }}>
+              <Bell size={24} strokeWidth={2} />
             </button>
           </div>
 
-          {/* Profile Tab Content */}
-          {mainTab === "profile" && (
-            <div className="bg-white text-black p-8 md:p-12 max-w-6xl mx-auto">
-              {/* User Profile */}
-              <div className="flex items-center gap-4 mb-8 pb-8 border-b border-black/10">
-                <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center text-white text-2xl">
-                  Y
-                </div>
-                <div>
-                  <h3 className="text-xl">YSL Enthusiast</h3>
-                  <p className="text-black/60 text-sm">Scent Architect</p>
+          <div className="main-tabs">
+            <button className={`m-tab ${page === "discover" ? "active" : ""}`} onClick={() => setPage("discover")}>Discover</button>
+            <button className={`m-tab ${page === "profile" ? "active" : ""}`} onClick={() => setPage("profile")}>Profile</button>
+            <button className={`m-tab ${page === "community" ? "active" : ""}`} onClick={() => setPage("community")}>Community</button>
+          </div>
+
+          {/* PROFILE PAGE */}
+          {page === "profile" && (
+            <div className="page-content">
+              <div className="profile-header">
+                <div className="p-avatar">Y</div>
+                <h2 className="p-name">YSL Enthusiast</h2>
+                <div className="p-role">SCENT ARCHITECT</div>
+                <div className="p-stats">
+                  <div className="p-stat"><div className="p-stat-n">10</div><div className="p-stat-l">ITEMS</div></div>
+                  <div className="p-stat"><div className="p-stat-n">4</div><div className="p-stat-l">MIXES</div></div>
                 </div>
               </div>
 
-              {/* Tab Toggle */}
-              <div className="flex gap-2 mb-8">
-                <button
-                  onClick={() => setActiveTab("collection")}
-                  className={`flex-1 py-3 transition-colors ${
-                    activeTab === "collection"
-                      ? "bg-black text-white"
-                      : "bg-black/5 text-black hover:bg-black/10"
-                  }`}
-                >
-                  My Collection
-                </button>
-                <button
-                  onClick={() => setActiveTab("custom")}
-                  className={`flex-1 py-3 transition-colors ${
-                    activeTab === "custom"
-                      ? "bg-black text-white"
-                      : "bg-black/5 text-black hover:bg-black/10"
-                  }`}
-                >
-                  My Custom Creations
-                </button>
+              <div className="sub-tabs">
+                {([ ["ysl", "YSL Parfums"], ["layering", "Layering Notes"], ["custom", "My Mixes"] ] as [WardrobeTab, string][]).map(([v, l]) => (
+                  <button key={v} className={`s-tab ${wardrobeTab === v ? "active" : ""}`} onClick={() => setWardrobeTab(v)}>{l}</button>
+                ))}
               </div>
 
-              {/* Content */}
-              {activeTab === "collection" && (
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
-                  <div className="group cursor-pointer">
-                    <div className="relative overflow-hidden bg-neutral-100 mb-4 aspect-square">
-                      <img
-                        src="/asset/mon paris.webp"
-                        alt="Mon Paris"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-lg">YSL Mon Paris</p>
-                      <p className="text-xs text-black/60">Owned</p>
-                    </div>
+              {/* YSL Parfums Tab */}
+              {wardrobeTab === "ysl" && (
+                <>
+                  {/* MODIFIED: Fix for Goal 2 - Button moved to TOP */}
+                  <button className="btn-primary" style={{ marginBottom: 24 }}><Plus size={18} strokeWidth={3}/> ADD FRAGRANCE</button>
+                  <div className="item-grid">
+                    {yslFragrances.map((f, i) => (
+                      <div key={i} className="item-card">
+                        <div className="item-img-box"><img src={f.img} alt={f.name} /></div>
+                        <div className="item-name">{f.name}</div>
+                        <div className="item-sub">{f.sub}</div>
+                      </div>
+                    ))}
                   </div>
-
-                  <div className="group cursor-pointer">
-                    <div className="relative overflow-hidden bg-neutral-100 mb-4 aspect-square">
-                      <img
-                        src="/asset/libre1.jpg"
-                        alt="Libre"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-lg">YSL Libre</p>
-                      <p className="text-xs text-black/60">Owned</p>
-                    </div>
-                  </div>
-
-                  <div className="group cursor-pointer">
-                    <div className="relative overflow-hidden bg-neutral-100 mb-4 aspect-square">
-                      <img
-                        src="/asset/opium.webp"
-                        alt="Opium"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-lg">YSL Black Opium</p>
-                      <p className="text-xs text-black/60">Owned</p>
-                    </div>
-                  </div>
-                </div>
+                </>
               )}
 
-              {activeTab === "custom" && (
-                <div className="grid md:grid-cols-2 gap-4 mb-8">
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Evening Elegance</p>
-                    <p className="text-xs text-black/60">VECTOR + BLANC + YSL Libre</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Fresh Morning</p>
-                    <p className="text-xs text-black/60">AETHER + MINÉRALEWAVE</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                      <Star className="w-4 h-4" />
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Midnight Mystery</p>
-                    <p className="text-xs text-black/60">FLORENT + YSL Black Opium + VECTOR</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Power Meeting</p>
-                    <p className="text-xs text-black/60">BLANC + VECTOR</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Summer Breeze</p>
-                    <p className="text-xs text-black/60">NEROLI + AETHER + MINÉRALEWAVE</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                      <Star className="w-4 h-4" />
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Date Night Charm</p>
-                    <p className="text-xs text-black/60">YSL Mon Paris + FLORENT</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Yoga Zen</p>
-                    <p className="text-xs text-black/60">MINÉRALEWAVE + BLANC</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4, 5].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                    </div>
-                  </div>
-                  <div className="p-4 border border-black/10">
-                    <p className="mb-2">Weekend Wanderer</p>
-                    <p className="text-xs text-black/60">NEROLI + LUMEN</p>
-                    <div className="flex gap-1 mt-2">
-                      {[1, 2, 3, 4].map((star) => (
-                        <Star key={star} className="w-4 h-4 fill-black" />
-                      ))}
-                      <Star className="w-4 h-4" />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Register New Mix Button */}
-              <button
-                onClick={() => setShowMixModal(true)}
-                className="w-full bg-black text-white py-4 flex items-center justify-center gap-2 hover:bg-[#C2813F] transition-colors"
-              >
-                <Plus className="w-5 h-5" />
-                Register New Mix
-              </button>
-            </div>
-          )}
-
-          {/* Trending Tab Content */}
-          {mainTab === "trending" && (
-            <div className="bg-white text-black p-8 md:p-12 max-w-6xl mx-auto">
-              <h3
-                className="text-3xl mb-6"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Today's Scent Highlights
-              </h3>
-
-              {/* Daily Theme */}
-              <div className="mb-8 p-6 bg-[#C2813F]/10 border-l-4 border-[#C2813F]">
-                <p className="text-xs uppercase tracking-widest text-[#C2813F] mb-2">Friday, February 27, 2026</p>
-                <h4 className="text-xl mb-2" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Evening Sophistication
-                </h4>
-                <p className="text-black/70 text-sm">
-                  The perfect night to layer bold and refined notes for dinner events
-                </p>
-              </div>
-
-              {/* Featured Combinations */}
-              <div className="space-y-6 mb-8 pb-8 border-b border-black/10">
-                <div className="border-b border-black/10 pb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-2 h-2 bg-[#C2813F] rounded-full"></div>
-                    <p className="text-sm uppercase tracking-wider text-black/60">Combination of the Day</p>
-                  </div>
-                  <h5 className="text-lg mb-2">VECTOR + BLANC</h5>
-                  <p className="text-sm text-black/70">
-                    Sharp directional spice meets refined white tea for an unforgettable evening presence. Perfect for cocktail receptions and gallery openings.
-                  </p>
-                </div>
-
-                <div className="border-b border-black/10 pb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-2 h-2 bg-[#C2813F] rounded-full"></div>
-                    <p className="text-sm uppercase tracking-wider text-black/60">Weekend Favorite</p>
-                  </div>
-                  <h5 className="text-lg mb-2">NEROLI + FLORENT</h5>
-                  <p className="text-sm text-black/70">
-                    Fresh green floral layered with radiant brightness. Ideal for brunch dates and outdoor gatherings.
-                  </p>
-                </div>
-
-                <div className="pb-6">
-                  <div className="flex items-center gap-2 mb-3">
-                    <div className="w-2 h-2 bg-[#C2813F] rounded-full"></div>
-                    <p className="text-sm uppercase tracking-wider text-black/60">Professional Power</p>
-                  </div>
-                  <h5 className="text-lg mb-2">AETHER + MINÉRALEWAVE</h5>
-                  <p className="text-sm text-black/70">
-                    Elevated aromatic meets purified aquatic. The ultimate signature for important meetings and presentations.
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Community Tab Content */}
-          {mainTab === "community" && (
-            <div className="bg-white text-black p-8 md:p-12 max-w-6xl mx-auto">
-              <h3
-                className="text-3xl mb-8"
-                style={{ fontFamily: "'Playfair Display', serif" }}
-              >
-                Join Our Scent Communities
-              </h3>
-
-              {/* Community Clubs */}
-              <div className="grid md:grid-cols-3 gap-6 mb-12">
-                <div className="border-2 border-[#C2813F] p-6 hover:bg-[#C2813F]/5 transition-colors cursor-pointer">
-                  <h4 className="text-lg font-semibold mb-2">Padel & Perfume</h4>
-                  <p className="text-sm text-black/70 mb-4">For active souls who love fragrance on the court. Share your game-day scents and connect with fellow enthusiasts.</p>
-                  <button className="text-sm bg-[#C2813F] text-white px-4 py-2 hover:bg-[#C2813F]/80 transition-colors">
-                    Join Club
-                  </button>
-                </div>
-
-                <div className="border-2 border-[#C2813F] p-6 hover:bg-[#C2813F]/5 transition-colors cursor-pointer">
-                  <h4 className="text-lg font-semibold mb-2">Pilates Chic</h4>
-                  <p className="text-sm text-black/70 mb-4">The wellness-focused community. Discover scents that complement your health journey and mindful living.</p>
-                  <button className="text-sm bg-[#C2813F] text-white px-4 py-2 hover:bg-[#C2813F]/80 transition-colors">
-                    Join Club
-                  </button>
-                </div>
-
-                <div className="border-2 border-[#C2813F] p-6 hover:bg-[#C2813F]/5 transition-colors cursor-pointer">
-                  <h4 className="text-lg font-semibold mb-2">Evening Society</h4>
-                  <p className="text-sm text-black/70 mb-4">For the sophisticated evenings. Curated scents and recommendations for your most elegant nights out.</p>
-                  <button className="text-sm bg-[#C2813F] text-white px-4 py-2 hover:bg-[#C2813F]/80 transition-colors">
-                    Join Club
-                  </button>
-                </div>
-              </div>
-
-              {/* Community Feed Section */}
-              <div className="mb-8 pb-8 border-t border-black/10 pt-8">
-                <h4 className="text-2xl mb-6" style={{ fontFamily: "'Playfair Display', serif" }}>
-                  Share Your Experience
-                </h4>
-
-                {/* Post Input */}
-                <div className="mb-6 p-6 border-2 border-black/10 bg-black/[0.02]">
-                  <textarea
-                    placeholder="Share your latest scent discovery, a memorable combination, or thoughts about your fragrance journey..."
-                    className="w-full px-0 py-3 bg-transparent border-none focus:outline-none resize-none text-sm"
-                    rows={4}
-                  />
-                  <div className="flex justify-between items-center mt-4">
-                    <div className="flex gap-2 flex-wrap">
-                      <button className="px-3 py-1 bg-black/5 hover:bg-black/10 transition-colors text-xs">
-                        Padel & Perfume
-                      </button>
-                      <button className="px-3 py-1 bg-black/5 hover:bg-black/10 transition-colors text-xs">
-                        Pilates Chic
-                      </button>
-                      <button className="px-3 py-1 bg-black/5 hover:bg-black/10 transition-colors text-xs">
-                        Evening Society
-                      </button>
-                    </div>
-                    <button className="px-6 py-2 bg-black text-white hover:bg-[#C2813F] transition-colors text-sm">
-                      Post
-                    </button>
-                  </div>
-                </div>
-
-                {/* Community Posts */}
-                <div className="space-y-4">
-                  {communityPosts.slice(0, 5).map((post, index) => (
-                    <div key={index} className="pb-4 border-b border-black/10">
-                      <div className="flex items-start gap-3">
-                        <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center text-white text-sm flex-shrink-0">
-                          {post.user[0]}
+              {/* Layering Notes Tab */}
+              {wardrobeTab === "layering" && (
+                <>
+                  {/* MODIFIED: Fix for Goal 2 - Button moved to TOP */}
+                  <button className="btn-primary" style={{ marginBottom: 24 }}><Plus size={18} strokeWidth={3}/> ADD LAYERING SCENT</button>
+                  <div className="list-grid">
+                    {layeringScents.map((s, i) => (
+                      <div key={i} className="list-item">
+                        <div className="list-img-box"><img src={s.img} alt={s.name} /></div>
+                        <div style={{ flex: 1 }}>
+                          <div className="item-name">{s.name}</div>
+                          <div className="item-sub">{s.sub}</div>
                         </div>
-                        <div className="flex-1">
-                          <p className="text-sm mb-2">
-                            <span className="font-medium">{post.user}</span>
-                            <span className="text-black/60 ml-2">· 2h</span>
-                          </p>
-                          <p className="text-sm mb-3">{post.content}</p>
-                          <div className="flex gap-6 text-black/40">
-                            <button className="flex items-center gap-1 text-xs hover:text-black transition-colors">
-                              <MessageCircle className="w-4 h-4" />
-                              <span>{post.replies}</span>
-                            </button>
-                            <button className="flex items-center gap-1 text-xs hover:text-black transition-colors">
-                              <Heart className="w-4 h-4" />
-                              <span>{post.likes}</span>
-                            </button>
-                            <button className="flex items-center gap-1 text-xs hover:text-black transition-colors">
-                              <Share2 className="w-4 h-4" />
-                            </button>
-                          </div>
+                        <Check size={24} color="var(--gold)" strokeWidth={3} />
+                      </div>
+                    ))}
+                  </div>
+                </>
+              )}
+
+              {/* My Mixes Tab */}
+              {wardrobeTab === "custom" && (
+                <>
+                  {/* MODIFIED: Fix for Goal 2 - Button moved to TOP */}
+                  <button className="btn-primary" style={{ marginBottom: 24 }} onClick={() => setShowMixModal(true)}>
+                    <Plus size={18} strokeWidth={3}/> REGISTER NEW MIX
+                  </button>
+                  <div style={{ marginBottom: 32 }}>
+                    {customMixes.map((m, i) => (
+                      <div key={i} className="mix-card">
+                        <div className="mix-header">
+                          <div className="mix-name">{m.name}</div>
+                          <span className="mix-tag">{m.occasion}</span>
+                        </div>
+                        <div className="mix-combo">{m.combo}</div>
+                        <div style={{ display: "flex", gap: 4 }}>
+                          {[1,2,3,4,5].map((s) => (
+                            <Star key={s} size={16} fill={s <= m.stars ? "var(--gold)" : "none"} color={s <= m.stars ? "var(--gold)" : "#444"} />
+                          ))}
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          )}
+
+          {/* DISCOVER PAGE */}
+          {page === "discover" && (
+            <div className="page-content">
+              <div className="discover-hero">
+                <span className="section-label" style={{ color: 'var(--gold)' }}>TODAY'S THEME</span>
+                <h2>Evening Sophistication</h2>
+                <p>Bold and refined notes for tonight's events</p>
+              </div>
+
+              <span className="section-label">FEATURED COMBINATIONS</span>
+              <div style={{ marginBottom: 48 }}>
+                {trendingCombos.map((c, i) => (
+                  <div key={i} className="trending-item">
+                    <div className="t-rank">{c.rank}</div>
+                    <div style={{ flex: 1 }}>
+                      <div className="t-tag">{c.tag}</div>
+                      <div className="t-title">{c.name}</div>
+                      <div className="t-desc">{c.desc}</div>
                     </div>
-                  ))}
-                </div>
+                    <ChevronRight size={24} color="var(--g500)" />
+                  </div>
+                ))}
               </div>
             </div>
           )}
-        </div>
-      </section>
 
-      {/* Mixology Modal */}
-      {showMixModal && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-          <div className="bg-white text-black max-w-2xl w-full p-8 max-h-[90vh] overflow-y-auto">
-            <div className="flex justify-between items-center mb-8">
-              <h3
-                className="text-3xl"
-                style={{ fontFamily: "'Bodoni Moda', serif" }}
-              >
-                Create Your Mix
-              </h3>
-              <button onClick={() => setShowMixModal(false)}>
-                <X className="w-6 h-6" />
-              </button>
+          {/* COMMUNITY PAGE */}
+          {page === "community" && (
+            <div className="page-content">
+              <span className="section-label">LATEST ACTIVITY</span>
+              <div>
+                {communityPosts.map((p, i) => (
+                  <div key={i} className="feed-post">
+                    <div className="post-header">
+                      <div className="post-avatar">{p.avatar}</div>
+                      <div>
+                        <span className="post-user">{p.user}</span>
+                        <span className="post-time">· {p.time}</span>
+                      </div>
+                    </div>
+                    <div className="post-content">{p.content}</div>
+                    <div className="post-actions">
+                      <button className="action-btn"><Heart size={18} /> {p.likes}</button>
+                      <button className="action-btn"><MessageCircle size={18} /> {p.replies}</button>
+                      <button className="action-btn"><Share2 size={18} /></button>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
+          )}
+        </main>
 
-            <form className="space-y-6">
-              <div>
-                <label className="block mb-2 text-sm uppercase tracking-wider">
-                  Name your Creation
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-0 py-3 border-b border-black/20 focus:border-black focus:outline-none"
-                  placeholder="e.g., Evening Elegance"
-                />
+        <nav className="mobile-nav">
+          <button className={`nav-btn ${page === "discover" ? "active" : ""}`} onClick={() => setPage("discover")}>
+            <Flame size={22} strokeWidth={2.5} /><span>DISCOVER</span>
+          </button>
+          <button className={`nav-btn ${page === "profile" ? "active" : ""}`} onClick={() => setPage("profile")}>
+            <User size={22} strokeWidth={2.5} /><span>PROFILE</span>
+          </button>
+          <button className={`nav-btn ${page === "community" ? "active" : ""}`} onClick={() => setPage("community")}>
+            <Users size={22} strokeWidth={2.5} /><span>COMMUNITY</span>
+          </button>
+        </nav>
+
+        {showMixModal && (
+          <div className="modal-overlay" onClick={(e) => e.target === e.currentTarget && setShowMixModal(false)}>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h3 className="modal-title">CREATE YOUR MIX</h3>
+                <button onClick={() => setShowMixModal(false)} style={{ background: 'none', border: 'none', color: 'white', cursor: 'pointer' }}><X size={28} /></button>
+              </div>
+              
+              <div className="form-group">
+                <label>NAME YOUR CREATION</label>
+                <input type="text" className="form-input" placeholder="e.g., Midnight Mystery" />
+              </div>
+              
+              <div className="form-group">
+                <label>ACCORDS USED</label>
+                <div>
+                  {scentOptions.map((a) => (
+                    <button key={a} type="button" className={`accord-btn ${selectedAccords.includes(a) ? "selected" : ""}`} onClick={() => toggleAccord(a)}>{a}</button>
+                  ))}
+                </div>
               </div>
 
-              <div>
-                <label className="block mb-3 text-sm uppercase tracking-wider">
-                  Accords Used
-                </label>
-                <div className="flex flex-wrap gap-2">
-                  {scentOptions.map((accord) => (
-                    <button
-                      key={accord}
-                      type="button"
-                      onClick={() => toggleAccord(accord)}
-                      className={`px-4 py-2 text-sm transition-colors ${
-                        selectedAccords.includes(accord)
-                          ? "bg-black text-white"
-                          : "bg-black/5 text-black hover:bg-black/10"
-                      }`}
-                    >
-                      {accord}
+              <div className="form-group">
+                <label>RATING</label>
+                <div style={{ display: 'flex', gap: 12 }}>
+                  {[1,2,3,4,5].map((s) => (
+                    <button key={s} type="button" onClick={() => setRating(s)} style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                      <Star size={36} fill={s <= rating ? "var(--gold)" : "none"} color={s <= rating ? "var(--gold)" : "#fff"} strokeWidth={1.5} />
                     </button>
                   ))}
                 </div>
               </div>
 
-              <div>
-                <label className="block mb-2 text-sm uppercase tracking-wider">
-                  Occasion
-                </label>
-                <select className="w-full px-0 py-3 border-b border-black/20 focus:border-black focus:outline-none bg-transparent">
-                  <option>Select occasion...</option>
-                  <option>Daily Wear</option>
-                  <option>Evening Event</option>
-                  <option>Professional</option>
-                  <option>Date Night</option>
-                  <option>Weekend</option>
-                </select>
-              </div>
-
-              <div>
-                <label className="block mb-3 text-sm uppercase tracking-wider">
-                  Performance Rating
-                </label>
-                <div className="flex gap-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      type="button"
-                      onClick={() => setRating(star)}
-                      className="focus:outline-none"
-                    >
-                      <Star
-                        className={`w-8 h-8 ${
-                          star <= rating ? "fill-black" : "fill-none"
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block mb-2 text-sm uppercase tracking-wider">
-                  Your Thoughts
-                </label>
-                <textarea
-                  className="w-full px-0 py-3 border-b border-black/20 focus:border-black focus:outline-none resize-none"
-                  rows={4}
-                  placeholder="Describe your experience with this mix..."
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-black text-white py-4 hover:bg-[#C2813F] transition-colors"
-              >
-                Save Creation
-              </button>
-            </form>
+              <button className="btn-primary" style={{ marginTop: 32 }} onClick={() => setShowMixModal(false)}>SAVE CREATION</button>
+            </div>
           </div>
-        </div>
-      )}
-    </div>
+        )}
+
+      </div>
+    </>
   );
 }
