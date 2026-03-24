@@ -298,8 +298,12 @@ export function ScentAppPage() {
         {page === "discover" && (
           <div className="animate-in fade-in duration-300 px-4">
             
-            <div className="flex flex-col items-center justify-center pt-6 pb-6">
-              <div className="text-4xl font-serif font-bold mb-4" style={{ fontFamily: "Georgia, serif" }}>YSL</div>
+            <div className="flex flex-col items-center pt-6 mb-8">
+              <img 
+                src={isDarkTheme ? "/asset/ysl logo.png" : "/asset/logo black.png"} 
+                alt="YSL Logo" 
+                className="h-10 md:h-12 mb-4 object-contain" 
+              />
               <h1 className="text-xl md:text-2xl font-bold text-center tracking-tight">
                 Welcome to MYSCENT by<br/>YSL Beauty!
               </h1>
@@ -317,20 +321,21 @@ export function ScentAppPage() {
               </div>
             </div>
 
+            {/* Scrollable Chips */}
             <div className="flex gap-2 overflow-x-auto pb-4 mb-4 scrollbar-hide" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
+              <button className="flex-shrink-0 flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
                 <img src="/asset/removebg-power scent.png" className="w-4 h-4 rounded-full object-cover" alt="" />
                 LES POUVOIRS DE SILLAGE
               </button>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
+              <button className="flex-shrink-0 flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
                 <img src="/asset/libre1.jpg" className="w-4 h-4 rounded-full object-cover" alt="" />
                 FOR HER
               </button>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
-                <div className="w-4 h-4 bg-black rounded-full"></div>
+              <button className="flex-shrink-0 flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
+                <div className="w-4 h-4 bg-black rounded-full flex-shrink-0"></div>
                 FOR HIM
               </button>
-              <button className="flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
+              <button className="flex-shrink-0 flex items-center gap-1.5 border border-gray-200 rounded-full px-3 py-1.5 text-[9px] font-bold whitespace-nowrap shadow-sm bg-white active:scale-95 transition-transform">
                 <img src="/asset/opium.webp" className="w-4 h-4 rounded-full object-cover" alt="" />
                 LE VESTIAIRE DES PARFUMS
               </button>
@@ -411,8 +416,12 @@ export function ScentAppPage() {
         {/* ===================== APPOINTMENT PAGE ===================== */}
         {page === "appointment" && (
           <div className="animate-in fade-in duration-300 px-4 pb-8">
-            <div className="flex flex-col items-center justify-center pt-6 pb-4">
-              <div className="text-4xl font-serif font-bold mb-2" style={{ fontFamily: "Georgia, serif" }}>YSL</div>
+            <div className="flex flex-col items-center pt-6 mb-8">
+              <img 
+                src={isDarkTheme ? "/asset/ysl logo.png" : "/asset/logo black.png"} 
+                alt="YSL Logo" 
+                className="h-10 md:h-12 mb-4 object-contain" 
+              />
               <h1 className="text-xl md:text-2xl font-bold text-center tracking-tight uppercase">
                 Book Your Session
               </h1>
@@ -498,7 +507,11 @@ export function ScentAppPage() {
           <div className="animate-in fade-in duration-300 px-4">
             
             <div className="flex flex-col items-center pt-6 mb-8">
-              <div className="text-4xl font-serif font-bold mb-6" style={{ fontFamily: "Georgia, serif" }}>YSL</div>
+              <img 
+                src={isDarkTheme ? "/asset/ysl logo.png" : "/asset/logo black.png"} 
+                alt="YSL Logo" 
+                className="h-10 md:h-12 mb-4 object-contain" 
+              />
               <h2 className="text-2xl font-bold mb-6">Edit Your Profile</h2>
               
               <div className="w-24 h-24 rounded-full border-2 border-white bg-gray-800 overflow-hidden mb-6 relative group cursor-pointer shadow-lg shadow-white/10">
