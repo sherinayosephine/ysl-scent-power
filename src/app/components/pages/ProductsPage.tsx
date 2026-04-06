@@ -10,46 +10,46 @@ import {
 
 const products = [
   {
-    name: "FLORENT",
-    fullName: "FLORENT Eau De Toilette",
+    name: "BLOUSE",
+    fullName: "BLOUSE Eau de Parfum",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/florent.png",
+    image: "/asset/BLOUSE.jpg",
   },
   {
-    name: "MINÉRALEWAVE",
-    fullName: "MINÉRALEWAVE Eau De Toilette",
+    name: "TRENCH",
+    fullName: "TRENCH Eau De Parfum",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/minerale.png",
+    image: "/asset/TRENCH.jpg",
   },
   {
-    name: "VECTOR",
-    fullName: "VECTOR Eau De Toilette",
+    name: "BABYCAT",
+    fullName: "BABYCAT Eau De Parfum",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/vector.png",
+    image: "/asset/BABYCAT.jpg",
   },
   {
-    name: "AETHER",
-    fullName: "AETHER Eau De Toilette",
+    name: "LAVALLIERE",
+    fullName: "LAVALLIERE Eau De Parfum",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/aether.png",
+    image: "/asset/LAVALLIERE.jpg",
   },
   {
-    name: "BLANC",
-    fullName: "BLANC Eau De Toilette",
+    name: "CAPELINE",
+    fullName: "CAPELINE Eau De Parfum",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/blanc.png",
+    image: "/asset/CAPELLINE.jpg",
   },
   {
-    name: "NEROLI",
-    fullName: "NEROLI Eau De Toilette",
+    name: "SAHARIENNE",
+    fullName: "SAHARIENNE Eau De Parfum",
     price: "$100.00",
     size: "60ml Glass Bottle",
-    image: "/asset/neroli.png",
+    image: "/asset/SAHARIENNE.jpg",
   },
 ];
 
@@ -89,7 +89,7 @@ export function ProductsPage() {
           <h2
             className="text-3xl md:text-5xl lg:text-6xl mb-8 md:mb-12"
             style={{ fontFamily: "'Playfair Display', serif" }}
-          >OUR PRODUCTS COLLECTION</h2>
+          >OUR LAYERING PRODUCTS COLLECTION</h2>
 
           <div className="relative">
             <div
