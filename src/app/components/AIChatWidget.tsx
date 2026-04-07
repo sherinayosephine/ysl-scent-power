@@ -31,7 +31,7 @@ export function AIChatWidget({ onClose }: { onClose: () => void }) {
             ...prev,
             {
               role: "assistant",
-              content: "Today you look absolutely stunning, you are giving bold, sophisticated mamah muda vibes. Based on this energy, I suggest layering Scent Combination: YSL Libre and VECTOR.",
+              content: "Today you look absolutely stunning, you are giving bold, sophisticated mamah muda vibes. Based on this energy, I suggest layering Scent Combination: YSL Libre and BABYCAT.",
             },
           ]);
         }, 1500);
@@ -48,9 +48,9 @@ export function AIChatWidget({ onClose }: { onClose: () => void }) {
         role: "assistant",
         content:
           prompt === "Scent Combination Ideas"
-            ? "For a sophisticated daytime look, try BLANC + AETHER. For evening glamour, VECTOR + LUMEN creates an unforgettable presence. For fresh mornings, MINÉRALEWAVE + VERDE is perfect."
+            ? "For a sophisticated daytime look, try YSL Libre + TRENCH. For evening glamour, YSL Mon Paris + LAVALIERE creates an unforgettable presence. For fresh mornings, SAHARIENNE + CAPELINE is perfect."
             : prompt === "Occasion Recommendations"
-            ? "Business meetings: BLANC + AETHER. Date night: LUMEN + VECTOR. Casual weekend: VERDE + MINÉRALEWAVE. Special events: All six notes for maximum complexity."
+            ? "Business meetings: YSL Libre + TRENCH. Date night: YSL Mon Paris + LAVALIERE. Casual weekend: YSL Black Opium + CAPELINE. Special events: All six notes for maximum complexity."
             : "Layer lighter notes first, then add depth. Start with aquatic or floral bases, then build with spicy or woody accords. Always test on skin before committing to a full bottle.",
       },
     ]);
@@ -63,7 +63,7 @@ export function AIChatWidget({ onClose }: { onClose: () => void }) {
         { role: "user", content: input },
         {
           role: "assistant",
-          content: "I recommend exploring the VECTOR and BLANC combination for your needs. These notes create a sophisticated yet modern profile that works beautifully for any occasion.",
+          content: "I recommend exploring the SAHARIENNE and CAPELINE combination for your needs. These notes create a sophisticated yet modern profile that works beautifully for any occasion.",
         },
       ]);
       setInput("");
@@ -129,7 +129,7 @@ export function AIChatWidget({ onClose }: { onClose: () => void }) {
                             ...prev,
                             {
                               role: "assistant",
-                              content: "Today you look absolutely stunning, you are giving bold, sophisticated mamah muda vibes. Based on this energy, I suggest layering Scent Combination: YSL Libre and VECTOR.",
+                              content: "Today you look absolutely stunning, you are giving bold, sophisticated young mom vibes. Based on this energy, I suggest layering Scent Combination: YSL Libre and BABYCAT.",
                             },
                           ]);
                         }, 1500);

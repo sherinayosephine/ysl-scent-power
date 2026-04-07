@@ -22,7 +22,7 @@ interface Product {
 }
 
 // ================= DATA ARRAYS =================
-const scentOptions: string[] = ["LUMEN", "MINÉRALEWAVE", "VECTOR", "AETHER", "BLANC", "VERDE"];
+const scentOptions: string[] = ["BLOUSE", "TRENCH", "BABYCAT", "LAVALIERRE", "CAPELINE", "SAHARIENNE"];
 
 const yslProducts: Product[] = [
   { name: "LES POUVOIRS DE SILLAGE", type: "Discovery Kit", price: "$65.00", rating: 4.8, reviews: 100, img: "/asset/discovery kit.png" },
@@ -31,12 +31,12 @@ const yslProducts: Product[] = [
 ];
 
 const layeringScents: Product[] = [
-  { name: "VECTOR", sub: "Sharp Spice", img: "/asset/vector.png" },
-  { name: "BLANC", sub: "White Tea", img: "/asset/blanc.png" },
-  { name: "AETHER", sub: "Aromatic", img: "/asset/aether.png" },
-  { name: "MINÉRALEWAVE", sub: "Aquatic", img: "/asset/minerale.png" },
-  { name: "LUMEN", sub: "Citrus", img: "/asset/florent.png" },
-  { name: "VERDE", sub: "Green Floral", img: "/asset/neroli.png" },
+  { name: "BABYCAT", sub: "Sharp Spice", img: "/asset/BABYCAT.jpg" },
+  { name: "CAPELINE", sub: "White Tea", img: "/asset/CAPELLINE.jpg" },
+  { name: "LAVALIERE", sub: "Aromatic", img: "/asset/LAVALIERRE.jpg" },
+  { name: "TRENCH", sub: "Aquatic", img: "/asset/TRENCH.jpg" },
+  { name: "BLOUSE", sub: "Citrus", img: "/asset/BLOUSE.jpg" },
+  { name: "SAHARIENNE", sub: "Green Floral", img: "/asset/SAHARIENNE.jpg" },
 ];
 
 const customMixes = [
@@ -61,8 +61,8 @@ const customMixes = [
 ];
 
 const communityPosts = [
-  { user: "Sofia M.", avatar: "S", content: "Just layered YSL Libre with VECTOR. The dry down is incredible. Perfect for the evening out! #YSLScentPower #VECTOR", likes: 234, replies: 12, time: "2h" },
-  { user: "Aria K.", avatar: "A", content: "BLANC + AETHER = my new signature for morning meetings. So fresh and sophisticated! ✨", likes: 189, replies: 8, time: "4h" },
+  { user: "Sofia M.", avatar: "S", content: "Just layered YSL Libre with BABYCAT. The dry down is incredible. Perfect for the evening out! #YSLScentPower #BABYCAT", likes: 234, replies: 12, time: "2h" },
+  { user: "Aria K.", avatar: "A", content: "CAPELINE + LAVALIERRE = my new signature for morning meetings. So fresh and sophisticated! ✨", likes: 189, replies: 8, time: "4h" },
   { user: "Luna P.", avatar: "L", content: "Tried the YSL vending machine experience today. Mind blown by the personalization and the AI assistant! 🖤", likes: 412, replies: 23, time: "5h" },
 ];
 
@@ -131,9 +131,9 @@ function AIChatWidget({ onClose }: { onClose: () => void }) {
         role: "assistant",
         content:
           prompt === "Scent Combination Ideas"
-            ? "For a sophisticated daytime look, try BLANC + AETHER. For evening glamour, VECTOR + LUMEN creates an unforgettable presence. For fresh mornings, MINÉRALEWAVE + VERDE is perfect."
+            ? "For a sophisticated daytime look, try CAPELINE + LAVALIERRE. For evening glamour, VECTOR + LUMEN creates an unforgettable presence. For fresh mornings, TRENCH + SAHARIENNE is perfect."
             : prompt === "Occasion Recommendations"
-            ? "Business meetings: BLANC + AETHER. Date night: LUMEN + VECTOR. Casual weekend: VERDE + MINÉRALEWAVE. Special events: All six notes for maximum complexity."
+            ? "Business meetings: CAPELINE + LAVALIERRE. Date night: LUMEN + VECTOR. Casual weekend: SAHARIENNE + TRENCH. Special events: All six notes for maximum complexity."
             : "Layer lighter notes first, then add depth. Start with aquatic or floral bases, then build with spicy or woody accords. Always test on skin before committing to a full bottle.",
       },
     ]);
@@ -146,7 +146,7 @@ function AIChatWidget({ onClose }: { onClose: () => void }) {
         { role: "user", content: input },
         {
           role: "assistant",
-          content: "I recommend exploring the VECTOR and BLANC combination for your needs. These notes create a sophisticated yet modern profile that works beautifully for any occasion.",
+          content: "I recommend exploring the BABYCAT and CAPELINE combination for your needs. These notes create a sophisticated yet modern profile that works beautifully for any occasion.",
         },
       ]);
       setInput("");

@@ -12,43 +12,43 @@ const products = [
   {
     name: "BLOUSE",
     fullName: "BLOUSE Eau de Parfum",
-    price: "$100.00",
-    size: "60ml Glass Bottle",
+    price: "$195.00",
+    size: "35ml Glass Bottle",
     image: "/asset/BLOUSE.jpg",
   },
   {
     name: "TRENCH",
     fullName: "TRENCH Eau De Parfum",
-    price: "$100.00",
-    size: "60ml Glass Bottle",
+    price: "$195.00",
+    size: "35ml Glass Bottle",
     image: "/asset/TRENCH.jpg",
   },
   {
     name: "BABYCAT",
     fullName: "BABYCAT Eau De Parfum",
-    price: "$100.00",
-    size: "60ml Glass Bottle",
+    price: "$195.00",
+    size: "35ml Glass Bottle",
     image: "/asset/BABYCAT.jpg",
   },
   {
     name: "LAVALLIERE",
     fullName: "LAVALLIERE Eau De Parfum",
-    price: "$100.00",
-    size: "60ml Glass Bottle",
+    price: "$195.00",
+    size: "35ml Glass Bottle",
     image: "/asset/LAVALLIERE.jpg",
   },
   {
     name: "CAPELINE",
     fullName: "CAPELINE Eau De Parfum",
-    price: "$100.00",
-    size: "60ml Glass Bottle",
+    price: "$195.00",
+    size: "35ml Glass Bottle",
     image: "/asset/CAPELLINE.jpg",
   },
   {
     name: "SAHARIENNE",
     fullName: "SAHARIENNE Eau De Parfum",
-    price: "$100.00",
-    size: "60ml Glass Bottle",
+    price: "$195.00",
+    size: "35ml Glass Bottle",
     image: "/asset/SAHARIENNE.jpg",
   },
 ];
@@ -151,7 +151,7 @@ export function ProductsPage() {
           <div className="grid md:grid-cols-2 gap-12 items-center bg-black text-white p-12">
             <div>
               <img
-                src="/asset/discovery kit.png"
+                src="/asset/miniature.jpg"
                 alt="Discovery Kit"
                 className="w-full h-96 object-cover"
               />
@@ -161,11 +161,11 @@ export function ProductsPage() {
                 className="text-4xl md:text-5xl"
                 style={{ fontFamily: "'Playfair Display', serif" }}
               >
-                YSL Les Pouvoirs de Sillage
+                YSL Le Vestiaire Des Parfums Miniature Set
               </h3>
               <p className="text-3xl text-[#C2813F]">$65.00</p>
               <p className="text-lg text-white/80">
-                For Discovery Kit. 6 YSL Les Pouvoirs de Sillage (5 ml cartridge refillable)
+                For Miniature Set. 5 YSL LVDP (7.5 ml cartridge refillable)
               </p>
               <button className="flex items-center gap-2 border border-white px-8 py-4 hover:bg-white hover:text-black transition-colors">
                 <ShoppingCart className="w-5 h-5" />
@@ -250,7 +250,7 @@ export function ProductsPage() {
               YSL Travel Dual Spray
             </h3>
             <p className="text-2xl">
-              $50.00 <span className="text-lg text-black/60">For YSL Travel Dual Spray from YSL Collection Series</span>
+              $99.00 <span className="text-lg text-black/60">For YSL Travel Dual Spray from YSL Collection Series</span>
             </p>
             <p className="text-lg text-black/70">
               A luxury dual spray designed to hold two fragrance expressions in one compact format.
