@@ -25,7 +25,7 @@ interface Product {
 const scentOptions: string[] = ["BLOUSE", "TRENCH", "BABYCAT", "LAVALIERRE", "CAPELINE", "SAHARIENNE"];
 
 const yslProducts: Product[] = [
-  { name: "LES POUVOIRS DE SILLAGE", type: "Discovery Kit", price: "$65.00", rating: 4.8, reviews: 100, img: "/asset/discovery kit.png" },
+  { name: "LE VESTIAIRE DES PARFUMS", type: "Miniature Set", price: "$65.00", rating: 4.8, reviews: 100, img: "/asset/miniature.jpg" },
   { name: "TRAVEL DUAL SPRAY", type: "Travel Collection", price: "$50.00", rating: 4.8, reviews: 100, img: "/asset/dual spray.png" },
   { name: "LIBRE EDP", type: "Eau de Parfum", price: "$130.00", rating: 4.8, reviews: 100, img: "/asset/libre1.jpg" },
 ];
@@ -33,7 +33,7 @@ const yslProducts: Product[] = [
 const layeringScents: Product[] = [
   { name: "BABYCAT", sub: "Sharp Spice", img: "/asset/BABYCAT.jpg" },
   { name: "CAPELINE", sub: "White Tea", img: "/asset/CAPELLINE.jpg" },
-  { name: "LAVALIERE", sub: "Aromatic", img: "/asset/LAVALIERRE.jpg" },
+  { name: "LAVALLIERE", sub: "Aromatic", img: "/asset/LAVALLIERE.jpg" },
   { name: "TRENCH", sub: "Aquatic", img: "/asset/TRENCH.jpg" },
   { name: "BLOUSE", sub: "Citrus", img: "/asset/BLOUSE.jpg" },
   { name: "SAHARIENNE", sub: "Green Floral", img: "/asset/SAHARIENNE.jpg" },
