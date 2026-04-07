@@ -42,19 +42,19 @@ const layeringScents: Product[] = [
 const customMixes = [
   { 
     name: "OFFICE WEAR", 
-    combo: "LIBRE EDP + NEROLI", 
+    combo: "LIBRE EDP + SAHARIENNE", 
     img: "/asset/libre1.jpg",
     owns: "1.7K", wants: "2K", likes: "99%", time: "ALL DAY"
   },
   { 
     name: "SPORTY GUY", 
-    combo: "Y EDP + BLANC", 
+    combo: "Y EDP + CAPELINE", 
     img: "/asset/dual spray.png",
     owns: "1.2K", wants: "1.1K", likes: "89%", time: "DAY"
   },
   { 
     name: "FANCY DINNER", 
-    combo: "MYSLF Le Parfum + VECTOR", 
+    combo: "MYSLF Le Parfum + BABYCAT", 
     img: "/asset/opium.webp",
     owns: "1.2K", wants: "1.1K", likes: "89%", time: "NIGHT"
   },
